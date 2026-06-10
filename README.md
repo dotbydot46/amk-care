@@ -33,3 +33,10 @@ Please confirm:
 5. Whether any DBS, insurance or accreditation claims can be shown
 6. Privacy Policy and Terms page content
 7. Whether the enquiry form should connect to email, Google Sheet, CRM or website backend
+
+
+## V7 update
+- Header uses the original AMK Care logo image.
+- Home navigation now links to the hero section and has JavaScript scroll support.
+- Hero text, price badge, and care photo placement were balanced for desktop, tablet, and mobile.
+- Fixed form markup and improved responsive logo/header/footer styling.

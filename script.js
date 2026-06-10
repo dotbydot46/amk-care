@@ -1,3 +1,17 @@
+
+// Reliable one-page navigation, including the Home link on GitHub Pages.
+document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+  anchor.addEventListener('click', (event) => {
+    const targetId = anchor.getAttribute('href');
+    if (!targetId || targetId === '#') return;
+    const target = document.querySelector(targetId);
+    if (!target) return;
+    event.preventDefault();
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    history.replaceState(null, '', targetId);
+  });
+});
+
 const toggle = document.querySelector('.nav-toggle');
 const menu = document.querySelector('#nav-menu');
 if (toggle && menu) {
@@ -13,7 +27,8 @@ if (toggle && menu) {
   });
 }
 
-document.querySelector('#year').textContent = new Date().getFullYear();
+const yearEl = document.querySelector('#year');
+if (yearEl) yearEl.textContent = new Date().getFullYear();
 
 const revealEls = document.querySelectorAll('.reveal');
 if ('IntersectionObserver' in window) {
