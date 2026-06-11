@@ -3,17 +3,51 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="AMK Care provides compassionate non-clinical live-in care and support at home from £1,200 per week." />
+  <meta name="description" content="Request a free AMK Care consultation for compassionate non-clinical live-in care and support at home from £1,200 per week." />
+  <link rel="canonical" href="https://amkcare.co.uk/" />
   <meta name="theme-color" content="#05254a" />
   <meta property="og:title" content="AMK Care | Compassionate Live-in Care at Home" />
-  <meta property="og:description" content="Trusted live-in care and support at home from £1,200 per week. Contact AMK Care for a free care consultation." />
+  <meta property="og:description" content="Trusted live-in care and support at home from £1,200 per week. Request a free AMK Care consultation by form, WhatsApp, phone or email." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://amkcare.co.uk/" />
-  <meta property="og:image" content="assets/amk-care-logo.png" />
-  <title>AMK Care | Compassionate Live-in Care at Home</title>
-  <link rel="icon" href="assets/amk-care-icon.png" />
-  <link rel="preload" href="assets/hero-care-real.jpg" as="image" />
+  <meta property="og:image" content="assets/hero-care-real.webp" />
+  <title>AMK Care | Request a Free Live-in Care Consultation</title>
+  <link rel="icon" href="assets/amk-care-mark.svg" type="image/svg+xml" />
+  <link rel="preload" href="assets/hero-care-real.webp" as="image" />
   <link rel="stylesheet" href="styles.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://amkcare.co.uk/#organization",
+        "name": "AMK Care",
+        "url": "https://amkcare.co.uk/",
+        "logo": "https://amkcare.co.uk/assets/amk-care-official-logo.webp",
+        "email": "help@amkcare.co.uk",
+        "telephone": "+447852888932",
+        "sameAs": [
+          "https://www.instagram.com/amkcare",
+          "https://www.facebook.com/share/1JTbkJA1Gn/"
+        ]
+      },
+      {
+        "@type": "Service",
+        "@id": "https://amkcare.co.uk/#live-in-care-service",
+        "name": "Live-in care and support at home",
+        "serviceType": "Non-clinical live-in care and support at home",
+        "provider": { "@id": "https://amkcare.co.uk/#organization" },
+        "offers": {
+          "@type": "Offer",
+          "price": "1200",
+          "priceCurrency": "GBP",
+          "description": "Live-in care from £1,200 per week, subject to individual needs and care plan."
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
@@ -22,7 +56,7 @@
     <nav class="nav" aria-label="Main navigation">
       <div class="container nav__inner">
         <a href="#home" class="brand" aria-label="AMK Care home">
-          <img src="assets/amk-care-logo.png" alt="AMK Care" width="690" height="570" />
+          <img src="assets/amk-care-logo.svg" alt="AMK Care" class="brand__logo" width="390" height="96" />
         </a>
 
         <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu">
@@ -37,44 +71,61 @@
           <a href="#live-in-care">Live-in Care</a>
           <a href="#faqs">FAQs</a>
           <a href="#contact">Contact Us</a>
-          <a class="btn btn--gold btn--small" href="#contact">Get in Touch <span aria-hidden="true">›</span></a>
+          <a class="btn btn--gold btn--small" href="#contact">Request Free Consultation <span aria-hidden="true">›</span></a>
         </div>
       </div>
     </nav>
   </header>
 
   <main id="main">
-    <section class="hero section-pad" id="home">
+    <section class="hero" id="home">
       <div class="container hero__inner">
         <div class="hero__copy reveal">
-          <span class="eyebrow">Live-in care & support at home</span>
-          <h1>Compassionate Live-in Care at Home</h1>
-          <p class="lead">Trusted, personalised support for individuals and families.</p>
-          <div class="hero-price" aria-label="Live-in care from £1,200 per week">
-            <span>Live-in care from</span>
-            <strong>£1,200</strong>
-            <span>per week</span>
-          </div>
+          <span class="eyebrow">Live-in care &amp; support at home</span>
+          <h1>Compassionate live-in care at home</h1>
+          <p class="lead">Trusted, personalised support for individuals and families — with live-in care from <strong>£1,200 per week.</strong></p>
           <p>AMK Care provides professional, non-clinical live-in care and support that helps you or your loved ones live safely, comfortably and with dignity at home.</p>
           <div class="hero__actions">
-            <a class="btn" href="tel:07852888932">Contact</a>
-            <a class="btn btn--outline" href="https://wa.me/447852888932" target="_blank" rel="noopener">WhatsApp</a>
+            <a class="btn btn--gold" href="#contact">Request a Free Care Consultation</a>
+            <a class="btn btn--outline" href="https://wa.me/447852888932?text=Hello%20AMK%20Care%2C%20I%20would%20like%20to%20request%20a%20free%20care%20consultation." target="_blank" rel="noopener">WhatsApp</a>
           </div>
           <ul class="hero__checks" aria-label="AMK Care highlights">
             <li>Personalised care plans</li>
             <li>Clear weekly pricing</li>
-            <li>Family-focused support</li>
+            <li>Fast enquiry by form, email or WhatsApp</li>
           </ul>
         </div>
 
-        <div class="hero__visual reveal">
-          <div class="hero__image-card">
-            <img src="assets/hero-care-real.jpg" alt="AMK Care support at home with an older person" />
-            <div class="family-badge">
-              <span>Care that</span>
-              <strong>feels like family</strong>
-            </div>
-          </div>
+        <figure class="hero__visual reveal">
+          <img src="assets/hero-care-real.webp" alt="A warm AMK Care companionship moment in a café" />
+          <figcaption class="family-badge">
+            <span>Care that</span>
+            <strong>feels like family</strong>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="trust-strip" aria-label="AMK Care trust highlights">
+      <div class="container trust-strip__grid">
+        <div><strong>One-to-one support</strong><span>Care shaped around the person</span></div>
+        <div><strong>Home comfort</strong><span>Stay close to familiar routines</span></div>
+        <div><strong>Clear pricing</strong><span>Live-in care from £1,200/week</span></div>
+        <div><strong>Easy enquiry</strong><span>Form, WhatsApp, email and CRM-ready</span></div>
+      </div>
+    </section>
+
+    <section class="enquiry-options section-pad-sm" aria-label="Easy enquiry options">
+      <div class="container enquiry-options__grid">
+        <div class="enquiry-options__intro reveal">
+          <span class="eyebrow">Start here</span>
+          <h2>Request a free care consultation in the way that feels easiest.</h2>
+          <p>Families can contact AMK Care by form, WhatsApp, phone or email. The website is also prepared for a Google Sheet or CRM lead tracker so every enquiry can be followed up clearly.</p>
+        </div>
+        <div class="quick-enquiry-cards reveal">
+          <a class="quick-card" href="#contact"><span>01</span><strong>Website Form</strong><small>Best for full care details</small></a>
+          <a class="quick-card" href="https://wa.me/447852888932?text=Hello%20AMK%20Care%2C%20I%20would%20like%20to%20request%20a%20free%20care%20consultation." target="_blank" rel="noopener"><span>02</span><strong>WhatsApp</strong><small>Quick message to AMK Care</small></a>
+          <a class="quick-card" href="mailto:help@amkcare.co.uk?subject=Free%20Care%20Consultation%20Request"><span>03</span><strong>Email</strong><small>Send enquiry by email</small></a>
         </div>
       </div>
     </section>
@@ -82,7 +133,7 @@
     <section class="about-snapshot section-pad" id="about">
       <div class="container snapshot__grid">
         <div class="snapshot__image reveal">
-          <img src="assets/about-care-real.jpg" alt="Warm AMK Care support moment at home" />
+          <img src="assets/care-celebration.webp" alt="A warm AMK Care celebration moment at home" />
         </div>
         <div class="snapshot__copy reveal">
           <span class="eyebrow">About AMK Care</span>
@@ -98,14 +149,35 @@
       <div class="container">
         <div class="section-heading reveal">
           <span class="eyebrow">Our Services</span>
-          <h2>Comprehensive Support Tailored to You</h2>
+          <h2>Comprehensive support tailored to you</h2>
           <p>Clear, practical support shaped around the person, the home and the family.</p>
         </div>
         <div class="service-grid">
           <article class="service-card reveal"><span aria-hidden="true">01</span><h3>Live-in Care</h3><p>Ongoing support at home with daily routines, reassurance and companionship.</p></article>
           <article class="service-card reveal"><span aria-hidden="true">02</span><h3>Companionship</h3><p>Conversation, emotional support, activities and helping reduce loneliness.</p></article>
           <article class="service-card reveal"><span aria-hidden="true">03</span><h3>Personal Care Support</h3><p>Respectful help with washing, dressing, grooming and daily comfort.</p></article>
-          <article class="service-card reveal"><span aria-hidden="true">04</span><h3>Meals & Daily Living</h3><p>Meal preparation, light household help, appointments and everyday tasks.</p></article>
+          <article class="service-card reveal"><span aria-hidden="true">04</span><h3>Meals &amp; Daily Living</h3><p>Meal preparation, light household help, appointments and everyday tasks.</p></article>
+        </div>
+        <div class="section-mini-cta reveal">
+          <p>Not sure what type of support is needed?</p>
+          <a class="btn btn--gold" href="#contact">Request a Free Care Consultation</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="moments-section section-pad-sm" aria-label="AMK Care real moments">
+      <div class="container">
+        <div class="moments-heading reveal">
+          <div>
+            <span class="eyebrow">Real moments</span>
+            <h2>Warmth, companionship and everyday life.</h2>
+          </div>
+          <p>Warm, real moments help families see the care, connection and companionship behind AMK Care.</p>
+        </div>
+        <div class="moments-grid">
+          <figure class="moment-card moment-card--large reveal"><img src="assets/garden-moment.webp" alt="People enjoying companionship in a peaceful garden" /><figcaption>Companionship beyond the home</figcaption></figure>
+          <figure class="moment-card reveal"><img src="assets/care-celebration.webp" alt="A joyful AMK Care moment at home" /><figcaption>Joyful home moments</figcaption></figure>
+          <figure class="moment-card reveal"><img src="assets/community-moment.webp" alt="A relaxed social gathering in the community" /><figcaption>Community and connection</figcaption></figure>
         </div>
       </div>
     </section>
@@ -113,8 +185,8 @@
     <section class="premium-band section-pad" id="live-in-care">
       <div class="container">
         <div class="section-heading section-heading--light reveal">
-          <span class="eyebrow eyebrow--gold">Why Choose AMK Care</span>
-          <h2>A Higher Standard of Care</h2>
+          <span class="eyebrow eyebrow--gold">Why choose AMK Care</span>
+          <h2>A higher standard of care</h2>
         </div>
         <div class="why-grid">
           <article class="why-card reveal"><span aria-hidden="true">♥</span><div><h3>Compassionate approach</h3><p>Care that puts kindness, patience and respect at the centre.</p></div></article>
@@ -129,7 +201,7 @@
       <div class="container">
         <div class="section-heading reveal">
           <span class="eyebrow">Pricing</span>
-          <h2>Clear Live-in Care Pricing</h2>
+          <h2>Clear live-in care pricing</h2>
         </div>
         <div class="price-panel reveal">
           <div class="price-panel__title">
@@ -149,10 +221,27 @@
       </div>
     </section>
 
+    <section class="local-seo-section section-pad-sm" id="service-areas">
+      <div class="container local-seo-card reveal">
+        <div>
+          <span class="eyebrow">Local care support</span>
+          <h2>Check live-in care availability in your area.</h2>
+          <p>For local SEO, this website is ready to be updated with AMK Care’s confirmed towns, counties and service areas. For now, families can enter their town or postcode in the consultation form so AMK Care can confirm availability.</p>
+        </div>
+        <div class="area-tags" aria-label="SEO-ready care topics">
+          <span>Live-in care near you</span>
+          <span>Care for one person</span>
+          <span>Couples live-in care</span>
+          <span>Companionship at home</span>
+        </div>
+        <a class="btn btn--gold" href="#contact">Check Availability</a>
+      </div>
+    </section>
+
     <section class="steps-section section-pad" id="how-it-works">
       <div class="container">
         <div class="section-heading reveal">
-          <span class="eyebrow">How It Works</span>
+          <span class="eyebrow">How it works</span>
           <h2>Simple steps to begin care</h2>
         </div>
         <div class="steps-grid">
@@ -163,32 +252,17 @@
       </div>
     </section>
 
-    <section class="allen-section section-pad">
-      <div class="container allen-grid">
-        <div class="allen-card reveal">
-          <img src="assets/allen-care-real.jpg" alt="Allen from AMK Care with an older person at home" />
-        </div>
-        <div class="allen-copy reveal">
-          <span class="eyebrow">A Personal Message</span>
-          <h2>Care should feel personal, respectful and reassuring.</h2>
-          <p>Choosing care for a loved one is not just a practical decision — it is an emotional one. AMK Care aims to make that journey feel clearer, kinder and more supportive from the first conversation.</p>
-          <div class="signature-card">
-            <strong>AMK Care</strong>
-            <span>Your Family, Our Compassionate Care — Together, at Home.</span>
-          </div>
-          <a class="btn btn--gold" href="https://wa.me/447852888932" target="_blank" rel="noopener">WhatsApp</a>
-        </div>
-      </div>
-    </section>
-
     <section class="identity-section section-pad-sm">
-      <div class="container identity-card reveal">
+      <div class="container identity-card identity-card--with-logo reveal">
+        <div class="identity-logo">
+          <img src="assets/amk-care-official-logo.webp" alt="Official AMK Care logo" loading="lazy" />
+        </div>
         <div>
           <span class="eyebrow">Company Identity</span>
           <h2>Professional details to be confirmed before launch</h2>
-          <p>Trading name: AMK Care. Legal company name, company number, registered address and regulatory status will be updated once confirmed.</p>
+          <p>Trading name: AMK Care. Legal company name, company number, registered address, confirmed service areas and regulatory status will be updated once confirmed.</p>
         </div>
-        <a class="btn btn--outline" href="#contact">Contact AMK Care</a>
+        <a class="btn btn--outline" href="#care-enquiry-form">Request Consultation</a>
       </div>
     </section>
 
@@ -212,12 +286,12 @@
     <section class="cta-strip" id="contact">
       <div class="container cta-grid">
         <div>
-          <h2>Ready to discuss your care needs?</h2>
-          <p>We are here to listen, guide you and help you understand the best support for your family.</p>
+          <h2>Request a free care consultation</h2>
+          <p>Tell us about the care situation once, and AMK Care can follow up by phone, WhatsApp or email.</p>
         </div>
         <div class="cta-actions">
-          <a class="btn" href="tel:07852888932">Contact</a>
-          <a class="btn btn--gold" href="https://wa.me/447852888932" target="_blank" rel="noopener">WhatsApp</a>
+          <a class="btn btn--gold" href="#care-enquiry-form">Request Consultation</a>
+          <a class="btn btn--outline btn--on-dark" href="https://wa.me/447852888932?text=Hello%20AMK%20Care%2C%20I%20would%20like%20to%20request%20a%20free%20care%20consultation." target="_blank" rel="noopener">WhatsApp</a>
         </div>
       </div>
     </section>
@@ -227,17 +301,17 @@
         <div class="contact-copy reveal">
           <span class="eyebrow">Contact AMK Care</span>
           <h2>Book a free care consultation</h2>
-          <p>Tell us about the situation and we will help you understand the next step.</p>
+          <p>Complete the form once. The enquiry can be prepared for email/WhatsApp and can also be saved to a Google Sheet or CRM when connected.</p>
           <div class="contact-list">
             <a href="tel:07852888932"><span>Contact</span><strong>07852 888 932</strong></a>
-            <a href="https://wa.me/447852888932" target="_blank" rel="noopener"><span>WhatsApp</span><strong>07852 888 932</strong></a>
+            <a href="https://wa.me/447852888932?text=Hello%20AMK%20Care%2C%20I%20would%20like%20to%20request%20a%20free%20care%20consultation." target="_blank" rel="noopener"><span>WhatsApp</span><strong>07852 888 932</strong></a>
             <a href="mailto:help@amkcare.co.uk"><span>Email</span><strong>help@amkcare.co.uk</strong></a>
             <a href="https://www.instagram.com/amkcare?igsh=MXM1OTNtaW83N2dmcA==" target="_blank" rel="noopener"><span>Instagram</span><strong>@amkcare</strong></a>
             <a href="https://www.facebook.com/share/1JTbkJA1Gn/?mibextid=wwXIfr" target="_blank" rel="noopener"><span>Facebook</span><strong>AMK Care</strong></a>
           </div>
         </div>
 
-        <form class="contact-form reveal" id="care-enquiry-form">
+        <form class="contact-form reveal" id="care-enquiry-form" data-source="website-consultation-form">
           <h3>Request a free consultation</h3>
           <div class="form-grid">
             <label>Full name <input name="name" type="text" autocomplete="name" required /></label>
@@ -262,71 +336,65 @@
                 <option value="Planning ahead">Planning ahead</option>
               </select>
             </label>
+            <label>Preferred contact method
+              <select name="preferredContact">
+                <option value="Phone call">Phone call</option>
+                <option value="WhatsApp">WhatsApp</option>
+                <option value="Email">Email</option>
+                <option value="Any method">Any method</option>
+              </select>
+            </label>
           </div>
           <label>Tell us briefly about the situation
             <textarea name="message" rows="5" placeholder="Please share the care needs, family concerns, or questions."></textarea>
           </label>
-          <button class="btn btn--gold" type="submit">Prepare Enquiry Email</button>
-          <p class="form-note">This demo form prepares an email to AMK Care. A real backend or CRM can be connected later.</p>
+          <label class="consent-line"><input name="consent" type="checkbox" required /> I agree for AMK Care to contact me about this enquiry.</label>
+          <button class="btn btn--gold" type="submit">Send Enquiry / Open Best Contact Option</button>
+          <div class="form-result" id="form-result" hidden></div>
+          <p class="form-note">The form is prepared for email, WhatsApp and optional Google Sheet/CRM saving. Add the Google Apps Script URL in <code>script.js</code> to activate the lead tracker.</p>
         </form>
       </div>
     </section>
   </main>
 
   <div class="floating-actions" aria-label="Quick contact actions">
-    <a href="tel:07852888932">Contact</a>
-    <a href="https://wa.me/447852888932" target="_blank" rel="noopener">WhatsApp</a>
+    <a href="#contact">Free Consultation</a>
+    <a href="https://wa.me/447852888932?text=Hello%20AMK%20Care%2C%20I%20would%20like%20to%20request%20a%20free%20care%20consultation." target="_blank" rel="noopener">WhatsApp</a>
   </div>
 
   <footer class="footer">
     <div class="container footer__grid">
       <div class="footer-brand">
-        <img src="assets/amk-care-logo.png" alt="AMK Care" width="690" height="570" />
+        <img src="assets/amk-care-logo.svg" alt="AMK Care" class="footer-logo" width="390" height="96" />
         <p>Compassionate, non-clinical live-in care and support services that help your loved ones live well, safely and independently at home.</p>
       </div>
       <div>
         <h3>Contact</h3>
         <a href="tel:07852888932">07852 888 932</a>
-        <a href="https://wa.me/447852888932" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="https://wa.me/447852888932?text=Hello%20AMK%20Care%2C%20I%20would%20like%20to%20request%20a%20free%20care%20consultation." target="_blank" rel="noopener">WhatsApp</a>
         <a href="mailto:help@amkcare.co.uk">help@amkcare.co.uk</a>
       </div>
       <div>
-        <h3>Services</h3>
-        <a href="#live-in-care">Live-in Care</a>
+        <h3>Our Services</h3>
+        <a href="#services">Live-in Care</a>
         <a href="#services">Companionship</a>
         <a href="#services">Personal Care Support</a>
         <a href="#pricing">Pricing</a>
+        <a href="#service-areas">Service Areas</a>
       </div>
       <div>
         <h3>Follow Us</h3>
         <a href="https://www.instagram.com/amkcare?igsh=MXM1OTNtaW83N2dmcA==" target="_blank" rel="noopener">Instagram</a>
         <a href="https://www.facebook.com/share/1JTbkJA1Gn/?mibextid=wwXIfr" target="_blank" rel="noopener">Facebook</a>
-        <p class="footer-small">Company number, registered address and regulatory status to be confirmed.</p>
+        <p class="footer-small">Company details, address, service areas and regulatory status to be confirmed before launch.</p>
       </div>
     </div>
     <div class="container footer__bottom">
-      <p>© <span id="year"></span> AMK Care. All rights reserved.</p>
-      <p>Privacy Policy | Terms & Conditions</p>
+      <p>© <span id="year">2026</span> AMK Care. All rights reserved.</p>
+      <p><a href="#">Privacy Policy</a> · <a href="#">Terms &amp; Conditions</a></p>
     </div>
   </footer>
 
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "AMK Care",
-    "url": "https://amkcare.co.uk/",
-    "logo": "https://amkcare.co.uk/assets/amk-care-logo.png",
-    "email": "help@amkcare.co.uk",
-    "telephone": "+447852888932",
-    "description": "Compassionate non-clinical live-in care and support services designed to help people remain safe, comfortable, and independent at home.",
-    "sameAs": [
-      "https://www.instagram.com/amkcare?igsh=MXM1OTNtaW83N2dmcA==",
-      "https://www.facebook.com/share/1JTbkJA1Gn/?mibextid=wwXIfr"
-    ],
-    "priceRange": "From £1,200 per week"
-  }
-  </script>
   <script src="script.js"></script>
 </body>
 </html>

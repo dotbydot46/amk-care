@@ -1,42 +1,46 @@
-# AMK Care Website V6 — Launch-Ready Responsive Build
+# AMK Care Website V10 — Lead & SEO Ready
 
-This version focuses on a premium, trustworthy and mobile-friendly AMK Care website.
+This version focuses on conversion and launch preparation.
 
-## What changed in V6
+## Added in V10
 
-- Improved responsive layout for mobile, tablet, laptop and desktop screens.
-- Reworked hero section to stop image/text overlap.
-- Updated the main care photo using the latest Allen care image.
-- Kept the premium AMK Care logo in the header and footer.
-- Improved spacing, card layout, pricing, FAQ, contact form and footer.
-- Kept contact labels simple: Contact and WhatsApp.
-- Kept phone/WhatsApp number: 07852 888 932.
-- Kept live-in care price: from £1,200 per week.
-- Kept company identity placeholders until legal details are confirmed.
-- Avoided unconfirmed claims such as CQC, DBS, insurance or registered manager status.
+- Clear main CTA: **Request a Free Care Consultation**.
+- Easy enquiry paths: website form, WhatsApp, email and phone.
+- Optional Google Sheet / CRM integration.
+- Lead tracker CSV template.
+- Local SEO-ready section for service areas.
+- SEO metadata, canonical URL, sitemap, robots.txt and structured data.
+- Official AMK logo file added as a master asset.
+- Continued responsive layout for mobile, tablet, laptop and desktop.
 
-## Files
+## Contact details used
 
-- `index.html` — main website page
-- `styles.css` — full responsive styling
-- `script.js` — mobile menu, reveal animation and enquiry email preparation
-- `assets/` — logo and images
+- Phone / WhatsApp: 07852 888 932
+- Email: help@amkcare.co.uk
+- Instagram: https://www.instagram.com/amkcare
+- Facebook: https://www.facebook.com/share/1JTbkJA1Gn/
 
-## Before launch
+## How to connect Google Sheet / CRM
 
-Please confirm:
+1. Create a Google Sheet called `AMK Care Leads`.
+2. Copy the sheet ID from the URL.
+3. Open **Extensions > Apps Script**.
+4. Paste the code from `google-apps-script.js`.
+5. Replace `PASTE_YOUR_GOOGLE_SHEET_ID_HERE` with your real sheet ID.
+6. Deploy as **Web app**.
+7. Set access to **Anyone with the link**.
+8. Copy the Web App URL.
+9. Open `script.js` and paste the URL into:
 
-1. Legal company name
-2. Company number
-3. Registered address
-4. Regulatory / CQC status if applicable
-5. Whether any DBS, insurance or accreditation claims can be shown
-6. Privacy Policy and Terms page content
-7. Whether the enquiry form should connect to email, Google Sheet, CRM or website backend
+```js
+googleSheetEndpoint: ''
+```
 
+10. Upload the website again and test the form.
 
-## V7 update
-- Header uses the original AMK Care logo image.
-- Home navigation now links to the hero section and has JavaScript scroll support.
-- Hero text, price badge, and care photo placement were balanced for desktop, tablet, and mobile.
-- Fixed form markup and improved responsive logo/header/footer styling.
+## Important before public launch
+
+- Confirm company name, company number, address and service areas.
+- Confirm regulatory status before adding any CQC/DBS/insurance claims.
+- Confirm permission/consent for all real photos used on the website.
+- Update `sitemap.xml` and `robots.txt` if the domain changes.
