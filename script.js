@@ -1,13 +1,11 @@
-// AMK Care V10
-// Static-site lead setup: email + WhatsApp now, Google Sheet/CRM when endpoint is added.
+// AMK Care V13
+// Premium visual direction + lead capture, CRM readiness and SEO-friendly one-page navigation.
 const AMK_CONFIG = {
   email: 'help@amkcare.co.uk',
-  phoneDisplay: '07852 888 932',
   phoneHref: '07852888932',
   whatsappNumber: '447852888932',
-  // Paste your deployed Google Apps Script Web App URL here to save enquiries to Google Sheets.
-  // Example: 'https://script.google.com/macros/s/AKfycbx.../exec'
-  googleSheetEndpoint: ''
+  googleSheetEndpoint: '', // Paste deployed Google Apps Script Web App URL here when ready.
+  companyNumber: '15313263'
 };
 
 function encodeParams(params) {
@@ -19,7 +17,7 @@ function encodeParams(params) {
 
 function buildLeadPayload(form) {
   const data = new FormData(form);
-  const payload = {
+  return {
     timestamp: new Date().toISOString(),
     status: 'New',
     name: String(data.get('name') || '').trim(),
@@ -29,13 +27,13 @@ function buildLeadPayload(form) {
     careType: String(data.get('careType') || '').trim(),
     whenNeeded: String(data.get('whenNeeded') || '').trim(),
     preferredContact: String(data.get('preferredContact') || '').trim(),
+    consent: data.get('consent') ? 'Yes' : 'No',
     message: String(data.get('message') || '').trim(),
-    source: form.dataset.source || 'website-form',
+    source: 'website-form',
     pageUrl: window.location.href,
     utmSource: new URLSearchParams(window.location.search).get('utm_source') || '',
     utmCampaign: new URLSearchParams(window.location.search).get('utm_campaign') || ''
   };
-  return payload;
 }
 
 function buildLeadMessage(payload) {
@@ -54,7 +52,8 @@ function buildLeadMessage(payload) {
     payload.message || 'No message provided.',
     '',
     `Source: ${payload.source}`,
-    `Page: ${payload.pageUrl}`
+    `Page: ${payload.pageUrl}`,
+    `Company number: ${AMK_CONFIG.companyNumber}`
   ].join('\n');
 }
 
@@ -68,23 +67,14 @@ function saveLeadToSheet(payload) {
   }).then(() => true).catch(() => false);
 }
 
-function showFormResult(payload, message, savedToSheet) {
-  const result = document.querySelector('#form-result');
-  if (!result) return;
-  const emailHref = `mailto:${AMK_CONFIG.email}?subject=${encodeURIComponent('AMK Care free consultation request')}&body=${encodeURIComponent(message)}`;
-  const whatsappHref = `https://wa.me/${AMK_CONFIG.whatsappNumber}?text=${encodeURIComponent(message)}`;
-  const callHref = `tel:${AMK_CONFIG.phoneHref}`;
+function openEmail(payload) {
+  const message = buildLeadMessage(payload);
+  window.location.href = `mailto:${AMK_CONFIG.email}?subject=${encodeURIComponent('AMK Care free consultation request')}&body=${encodeURIComponent(message)}`;
+}
 
-  result.hidden = false;
-  result.innerHTML = `
-    <strong>Enquiry prepared.</strong><br>
-    ${savedToSheet ? 'This enquiry has also been sent to the connected Google Sheet/CRM.' : 'Google Sheet/CRM is not connected yet, so use WhatsApp or Email to send the details.'}
-    <div class="form-result__actions">
-      <a href="${emailHref}">Send by Email</a>
-      <a href="${whatsappHref}" target="_blank" rel="noopener">Send by WhatsApp</a>
-      <a href="${callHref}">Call AMK Care</a>
-    </div>
-  `;
+function openWhatsApp(payload) {
+  const message = buildLeadMessage(payload);
+  window.open(`https://wa.me/${AMK_CONFIG.whatsappNumber}?text=${encodeURIComponent(message)}`, '_blank', 'noopener');
 }
 
 // Reliable one-page navigation, including the Home link on GitHub Pages.
@@ -140,23 +130,31 @@ if ('IntersectionObserver' in window) {
 }
 
 const form = document.querySelector('#care-enquiry-form');
+const formNote = document.querySelector('#form-note');
 if (form) {
-  form.addEventListener('submit', async (event) => {
-    event.preventDefault();
+  const submitLead = async (method) => {
     if (!form.checkValidity()) {
       form.reportValidity();
       return;
     }
     const payload = buildLeadPayload(form);
-    const message = buildLeadMessage(payload);
     const savedToSheet = await saveLeadToSheet(payload);
-    showFormResult(payload, message, savedToSheet);
-
-    const preferred = payload.preferredContact.toLowerCase();
-    if (preferred.includes('whatsapp')) {
-      window.open(`https://wa.me/${AMK_CONFIG.whatsappNumber}?text=${encodeURIComponent(message)}`, '_blank', 'noopener');
-    } else {
-      window.location.href = `mailto:${AMK_CONFIG.email}?subject=${encodeURIComponent('AMK Care free consultation request')}&body=${encodeURIComponent(message)}`;
+    if (formNote) {
+      formNote.textContent = savedToSheet
+        ? 'Enquiry saved to the private AMK Care lead tracker. Opening your chosen contact method now.'
+        : 'Opening your chosen contact method. Google Sheet/CRM can be connected later by adding the Apps Script Web App URL.';
     }
+    if (method === 'whatsapp') openWhatsApp(payload);
+    else openEmail(payload);
+  };
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    submitLead('email');
   });
+
+  const whatsappBtn = document.querySelector('#whatsapp-enquiry');
+  if (whatsappBtn) {
+    whatsappBtn.addEventListener('click', () => submitLead('whatsapp'));
+  }
 }
