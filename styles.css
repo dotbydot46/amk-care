@@ -638,3 +638,77 @@ textarea { resize: vertical; }
   .hero__visual { border-radius: 22px; }
   .family-badge { left: 12px; right: 12px; padding: 14px 16px; }
 }
+
+
+/* V15 launch polish: accessibility, legal pages, cookie consent */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible {
+  outline: 3px solid var(--gold-2);
+  outline-offset: 3px;
+  border-radius: 10px;
+}
+.legal-hero {
+  background: linear-gradient(135deg, var(--navy-3), var(--navy));
+  color: #fff;
+  padding: clamp(72px, 9vw, 120px) 0 clamp(46px, 6vw, 82px);
+}
+.legal-hero h1 { color: #fff; max-width: 900px; font-size: clamp(2.6rem, 5vw, 5.1rem); }
+.legal-hero p { color: rgba(255,255,255,.78); max-width: 780px; font-size: 1.08rem; }
+.legal-content { background: #fff; }
+.legal-card { max-width: 920px; margin: 0 auto; background: #fff; border: 1px solid rgba(5,37,74,.1); box-shadow: var(--shadow-soft); border-radius: 26px; padding: clamp(28px, 4vw, 54px); }
+.legal-card h2 { font-size: clamp(1.65rem, 3vw, 2.5rem); margin: 30px 0 12px; }
+.legal-card h2:first-child { margin-top: 0; }
+.legal-card ul { color: var(--muted); padding-left: 1.2rem; }
+.legal-card li { margin-bottom: .45rem; }
+.legal-card .notice { background: var(--cream); border: 1px solid rgba(216,161,74,.25); border-radius: 18px; padding: 18px; color: var(--ink); }
+.cookie-banner {
+  position: fixed;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  z-index: 300;
+  max-width: 980px;
+  margin: 0 auto;
+  background: rgba(255,255,255,.98);
+  border: 1px solid rgba(216,161,74,.35);
+  border-radius: 22px;
+  box-shadow: 0 26px 70px rgba(2,26,53,.2);
+  padding: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.cookie-banner[hidden] { display: none; }
+.cookie-banner p { margin: 0; }
+.cookie-banner > div { display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
+.footer__bottom a { text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 720px) {
+  .cookie-banner { align-items: stretch; flex-direction: column; }
+  .cookie-banner > div { justify-content: stretch; }
+  .cookie-banner .btn { flex: 1; }
+}
+
+
+/* V16 multi-page and careers polish */
+.section-action { margin-top: 28px; display: flex; justify-content: center; }
+.moments-grid--two { grid-template-columns: 1.1fr .9fr; max-width: 1050px; margin-inline: auto; }
+.career-highlight { background: linear-gradient(180deg, #fff, #fff8ef); }
+.career-card { display: grid; grid-template-columns: 1fr auto; gap: 28px; align-items: center; border-radius: var(--radius); padding: clamp(24px, 4vw, 40px); background: #fff; border: 1px solid rgba(216,161,74,.24); box-shadow: var(--shadow-soft); }
+.career-card h2 { font-size: clamp(1.8rem, 3vw, 2.7rem); }
+.join-intro { background: #fff8ef; }
+.join-grid { display: grid; grid-template-columns: .82fr 1.18fr; gap: clamp(28px, 5vw, 56px); align-items: start; }
+.service-grid--page .service-card h2 { font-size: clamp(1.35rem, 2.1vw, 1.8rem); margin-bottom: 12px; }
+.contact-form h2 { font-size: clamp(1.45rem, 2.4vw, 2rem); margin-bottom: 20px; }
+@media (max-width: 980px) {
+  .moments-grid--two, .career-card, .join-grid { grid-template-columns: 1fr; }
+  .career-card .btn { justify-self: start; }
+}
+@media (max-width: 720px) {
+  .section-action { justify-content: stretch; }
+  .section-action .btn, .career-card .btn { width: 100%; }
+}

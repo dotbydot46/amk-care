@@ -1,10 +1,11 @@
-// AMK Care V13
-// Premium visual direction + lead capture, CRM readiness and SEO-friendly one-page navigation.
+// AMK Care V16
+// Multi-page launch behaviour: navigation, client enquiries, carer applications, CRM readiness, cookie consent and GA4 placeholders.
 const AMK_CONFIG = {
   email: 'help@amkcare.co.uk',
   phoneHref: '07852888932',
   whatsappNumber: '447852888932',
   googleSheetEndpoint: '', // Paste deployed Google Apps Script Web App URL here when ready.
+  gaMeasurementId: '', // Optional: add GA4 ID, e.g. G-XXXXXXXXXX. Analytics loads only after cookie consent.
   companyNumber: '15313263'
 };
 
@@ -15,18 +16,26 @@ function encodeParams(params) {
     .join('&');
 }
 
-function buildLeadPayload(form) {
+function getFormPayload(form) {
   const data = new FormData(form);
-  return {
+  const payload = {
     timestamp: new Date().toISOString(),
     status: 'New',
+    leadType: String(data.get('leadType') || form.dataset.amkForm || 'Care enquiry').trim(),
     name: String(data.get('name') || '').trim(),
     phone: String(data.get('phone') || '').trim(),
     email: String(data.get('email') || '').trim(),
     location: String(data.get('location') || '').trim(),
+    preferredContact: String(data.get('preferredContact') || '').trim(),
     careType: String(data.get('careType') || '').trim(),
     whenNeeded: String(data.get('whenNeeded') || '').trim(),
-    preferredContact: String(data.get('preferredContact') || '').trim(),
+    experience: String(data.get('experience') || '').trim(),
+    roleInterest: String(data.get('roleInterest') || '').trim(),
+    availability: String(data.get('availability') || '').trim(),
+    rightToWork: String(data.get('rightToWork') || '').trim(),
+    dbs: String(data.get('dbs') || '').trim(),
+    references: String(data.get('references') || '').trim(),
+    drive: String(data.get('drive') || '').trim(),
     consent: data.get('consent') ? 'Yes' : 'No',
     message: String(data.get('message') || '').trim(),
     source: 'website-form',
@@ -34,31 +43,43 @@ function buildLeadPayload(form) {
     utmSource: new URLSearchParams(window.location.search).get('utm_source') || '',
     utmCampaign: new URLSearchParams(window.location.search).get('utm_campaign') || ''
   };
+  return payload;
 }
 
 function buildLeadMessage(payload) {
-  return [
-    'New AMK Care website enquiry',
+  const isCarer = payload.leadType.toLowerCase().includes('carer');
+  const lines = [
+    isCarer ? 'New AMK Care carer application' : 'New AMK Care free consultation request',
     '',
+    `Lead type: ${payload.leadType}`,
     `Name: ${payload.name}`,
     `Phone: ${payload.phone}`,
     `Email: ${payload.email}`,
-    `Care location: ${payload.location}`,
-    `Type of care: ${payload.careType}`,
-    `When needed: ${payload.whenNeeded}`,
-    `Preferred contact: ${payload.preferredContact}`,
-    '',
-    'Message:',
-    payload.message || 'No message provided.',
-    '',
-    `Source: ${payload.source}`,
-    `Page: ${payload.pageUrl}`,
-    `Company number: ${AMK_CONFIG.companyNumber}`
-  ].join('\n');
+    `Location: ${payload.location}`
+  ];
+  if (isCarer) {
+    lines.push(
+      `Experience: ${payload.experience}`,
+      `Role interest: ${payload.roleInterest}`,
+      `Availability: ${payload.availability}`,
+      `Right to work: ${payload.rightToWork}`,
+      `DBS: ${payload.dbs}`,
+      `References: ${payload.references}`,
+      `Drives: ${payload.drive}`
+    );
+  } else {
+    lines.push(
+      `Type of care: ${payload.careType}`,
+      `When needed: ${payload.whenNeeded}`,
+      `Preferred contact: ${payload.preferredContact}`
+    );
+  }
+  lines.push('', 'Message:', payload.message || 'No message provided.', '', `Page: ${payload.pageUrl}`, `Company number: ${AMK_CONFIG.companyNumber}`);
+  return lines.join('\n');
 }
 
 function saveLeadToSheet(payload) {
-  if (!AMK_CONFIG.googleSheetEndpoint) return Promise.resolve(false);
+  if (!AMK_CONFIG.googleSheetEndpoint || !AMK_CONFIG.googleSheetEndpoint.startsWith('http')) return Promise.resolve(false);
   return fetch(AMK_CONFIG.googleSheetEndpoint, {
     method: 'POST',
     mode: 'no-cors',
@@ -68,20 +89,39 @@ function saveLeadToSheet(payload) {
 }
 
 function openEmail(payload) {
-  const message = buildLeadMessage(payload);
-  window.location.href = `mailto:${AMK_CONFIG.email}?subject=${encodeURIComponent('AMK Care free consultation request')}&body=${encodeURIComponent(message)}`;
+  const subject = payload.leadType.toLowerCase().includes('carer') ? 'AMK Care carer application' : 'AMK Care free consultation request';
+  window.location.href = `mailto:${AMK_CONFIG.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(buildLeadMessage(payload))}`;
 }
 
 function openWhatsApp(payload) {
-  const message = buildLeadMessage(payload);
-  window.open(`https://wa.me/${AMK_CONFIG.whatsappNumber}?text=${encodeURIComponent(message)}`, '_blank', 'noopener');
+  window.open(`https://wa.me/${AMK_CONFIG.whatsappNumber}?text=${encodeURIComponent(buildLeadMessage(payload))}`, '_blank', 'noopener');
 }
 
-// Reliable one-page navigation, including the Home link on GitHub Pages.
-document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+function trackEvent(eventName, params = {}) { if (window.gtag) window.gtag('event', eventName, params); }
+function loadAnalyticsIfConsented() {
+  if (!AMK_CONFIG.gaMeasurementId || localStorage.getItem('amk_cookie_consent') !== 'accepted') return;
+  if (document.querySelector('script[data-amk-ga4]')) return;
+  const ga = document.createElement('script');
+  ga.async = true;
+  ga.src = `https://www.googletagmanager.com/gtag/js?id=${AMK_CONFIG.gaMeasurementId}`;
+  ga.setAttribute('data-amk-ga4', 'true');
+  document.head.appendChild(ga);
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function(){ window.dataLayer.push(arguments); };
+  window.gtag('js', new Date());
+  window.gtag('config', AMK_CONFIG.gaMeasurementId);
+}
+loadAnalyticsIfConsented();
+
+// Reliable navigation for same-page anchors, including Home on GitHub Pages and production domain.
+document.querySelectorAll('a[href*="#"]').forEach((anchor) => {
   anchor.addEventListener('click', (event) => {
-    const targetId = anchor.getAttribute('href');
-    if (!targetId || targetId === '#') return;
+    const href = anchor.getAttribute('href');
+    if (!href || href === '#') return;
+    const url = new URL(href, window.location.href);
+    if (url.pathname.replace(/\/index\.html$/, '/') !== window.location.pathname.replace(/\/index\.html$/, '/')) return;
+    const targetId = url.hash;
+    if (!targetId) return;
     if (targetId === '#top' || targetId === '#home') {
       event.preventDefault();
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -103,13 +143,14 @@ if (toggle && menu) {
     const isOpen = menu.classList.toggle('is-open');
     toggle.setAttribute('aria-expanded', String(isOpen));
   });
-  menu.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', () => {
-      menu.classList.remove('is-open');
-      toggle.setAttribute('aria-expanded', 'false');
-    });
-  });
+  function closeMenu() { menu.classList.remove('is-open'); toggle.setAttribute('aria-expanded', 'false'); }
+  menu.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', (event) => { if (event.key === 'Escape') closeMenu(); });
 }
+
+document.querySelectorAll('a[href^="tel:"]').forEach((link) => link.addEventListener('click', () => trackEvent('click_call', { link_url: link.href })));
+document.querySelectorAll('a[href^="mailto:"]').forEach((link) => link.addEventListener('click', () => trackEvent('click_email', { link_url: link.href })));
+document.querySelectorAll('a[href*="wa.me"]').forEach((link) => link.addEventListener('click', () => trackEvent('click_whatsapp', { link_url: link.href })));
 
 const yearEl = document.querySelector('#year');
 if (yearEl) yearEl.textContent = new Date().getFullYear();
@@ -125,36 +166,32 @@ if ('IntersectionObserver' in window) {
     });
   }, { threshold: 0.12 });
   revealEls.forEach((el) => observer.observe(el));
-} else {
-  revealEls.forEach((el) => el.classList.add('is-visible'));
-}
+} else { revealEls.forEach((el) => el.classList.add('is-visible')); }
 
-const form = document.querySelector('#care-enquiry-form');
-const formNote = document.querySelector('#form-note');
-if (form) {
-  const submitLead = async (method) => {
-    if (!form.checkValidity()) {
-      form.reportValidity();
-      return;
-    }
-    const payload = buildLeadPayload(form);
-    const savedToSheet = await saveLeadToSheet(payload);
-    if (formNote) {
-      formNote.textContent = savedToSheet
-        ? 'Enquiry saved to the private AMK Care lead tracker. Opening your chosen contact method now.'
-        : 'Opening your chosen contact method. Google Sheet/CRM can be connected later by adding the Apps Script Web App URL.';
-    }
-    if (method === 'whatsapp') openWhatsApp(payload);
-    else openEmail(payload);
-  };
-
-  form.addEventListener('submit', (event) => {
-    event.preventDefault();
-    submitLead('email');
-  });
-
-  const whatsappBtn = document.querySelector('#whatsapp-enquiry');
-  if (whatsappBtn) {
-    whatsappBtn.addEventListener('click', () => submitLead('whatsapp'));
+async function submitAMKForm(form, method) {
+  if (!form.checkValidity()) { form.reportValidity(); return; }
+  const payload = getFormPayload(form);
+  const note = form.querySelector('.form-note') || document.querySelector('#form-note');
+  const savedToSheet = await saveLeadToSheet(payload);
+  if (note) {
+    note.textContent = savedToSheet
+      ? 'Thank you. Your details have been saved to AMK Care’s private lead tracker. Opening your chosen contact method now.'
+      : 'Opening your chosen contact method. For final launch, add the Google Apps Script endpoint so enquiries are saved automatically.';
   }
+  trackEvent(payload.leadType.toLowerCase().includes('carer') ? 'carer_application' : 'generate_lead', { lead_source: method, currency: 'GBP', value: payload.leadType.toLowerCase().includes('carer') ? 0 : 1200 });
+  if (method === 'whatsapp') openWhatsApp(payload); else openEmail(payload);
 }
+
+document.querySelectorAll('form[data-amk-form], #care-enquiry-form, #carer-application-form').forEach((form) => {
+  form.addEventListener('submit', (event) => { event.preventDefault(); submitAMKForm(form, 'email'); });
+  form.querySelectorAll('[data-whatsapp-submit], #whatsapp-enquiry').forEach((btn) => {
+    btn.addEventListener('click', () => submitAMKForm(form, 'whatsapp'));
+  });
+});
+
+const cookieBanner = document.querySelector('#cookie-banner');
+const acceptCookies = document.querySelector('#accept-cookies');
+const rejectCookies = document.querySelector('#reject-cookies');
+if (cookieBanner && !localStorage.getItem('amk_cookie_consent')) cookieBanner.hidden = false;
+if (acceptCookies) acceptCookies.addEventListener('click', () => { localStorage.setItem('amk_cookie_consent', 'accepted'); if (cookieBanner) cookieBanner.hidden = true; loadAnalyticsIfConsented(); });
+if (rejectCookies) rejectCookies.addEventListener('click', () => { localStorage.setItem('amk_cookie_consent', 'essential'); if (cookieBanner) cookieBanner.hidden = true; });

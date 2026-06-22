@@ -1,1 +1,1 @@
-Timestamp,Status,Full Name,Phone,Email,Care Location,Type of Care,When Needed,Preferred Contact,Consent,Message,Source,Page URL,UTM Source,UTM Campaign,Company Number,Notes,Follow-up Date
+timestamp,status,leadType,name,phone,email,location,preferredContact,careType,whenNeeded,experience,roleInterest,availability,rightToWork,dbs,references,drive,consent,message,source,pageUrl,utmSource,utmCampaign,followUpDate,notes

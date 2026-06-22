@@ -1,71 +1,49 @@
 /**
- * AMK Care Google Sheet Lead Tracker
- * Company number: 15313263
- *
+ * AMK Care Google Sheets CRM endpoint - V16.
+ * Supports both client care enquiries and carer applications.
  * Setup:
- * 1) Create a Google Sheet named: AMK Care Lead Tracker
- * 2) Add a sheet/tab named: Leads
- * 3) Copy the spreadsheet ID from the URL and paste it below.
- * 4) In Apps Script, deploy as: Web app
- *    - Execute as: Me
- *    - Who has access: Anyone
- * 5) Copy the Web App URL into script.js as AMK_CONFIG.googleSheetEndpoint.
+ * 1) Create a Google Sheet.
+ * 2) Extensions > Apps Script, paste this file.
+ * 3) Deploy > New deployment > Web app.
+ * 4) Execute as: Me. Who has access: Anyone.
+ * 5) Copy the Web App URL into script.js > AMK_CONFIG.googleSheetEndpoint.
  */
-const SHEET_ID = 'PASTE_YOUR_GOOGLE_SHEET_ID_HERE';
-const SHEET_NAME = 'Leads';
-
-function getOrCreateSheet_() {
-  const spreadsheet = SpreadsheetApp.openById(SHEET_ID);
-  let sheet = spreadsheet.getSheetByName(SHEET_NAME);
-  if (!sheet) sheet = spreadsheet.insertSheet(SHEET_NAME);
-
-  const headers = [
-    'Timestamp', 'Status', 'Full Name', 'Phone', 'Email', 'Care Location',
-    'Type of Care', 'When Needed', 'Preferred Contact', 'Consent', 'Message',
-    'Source', 'Page URL', 'UTM Source', 'UTM Campaign', 'Company Number',
-    'Notes', 'Follow-up Date'
-  ];
-
-  if (sheet.getLastRow() === 0) {
-    sheet.appendRow(headers);
-    sheet.setFrozenRows(1);
-  }
-
-  return sheet;
-}
+const SHEET_NAME = 'AMK Website Leads';
+const HEADERS = [
+  'timestamp', 'status', 'leadType', 'name', 'phone', 'email', 'location',
+  'preferredContact', 'careType', 'whenNeeded',
+  'experience', 'roleInterest', 'availability', 'rightToWork', 'dbs', 'references', 'drive',
+  'consent', 'message', 'source', 'pageUrl', 'utmSource', 'utmCampaign', 'followUpDate', 'notes'
+];
 
 function doPost(e) {
-  const sheet = getOrCreateSheet_();
-  const p = e.parameter || {};
-
-  sheet.appendRow([
-    new Date(),
-    p.status || 'New',
-    p.name || '',
-    p.phone || '',
-    p.email || '',
-    p.location || '',
-    p.careType || '',
-    p.whenNeeded || '',
-    p.preferredContact || '',
-    p.consent || '',
-    p.message || '',
-    p.source || 'website-form',
-    p.pageUrl || '',
-    p.utmSource || '',
-    p.utmCampaign || '',
-    '15313263',
-    '',
-    ''
-  ]);
-
-  return ContentService
-    .createTextOutput(JSON.stringify({ ok: true }))
-    .setMimeType(ContentService.MimeType.JSON);
+  try {
+    const data = e.postData && e.postData.type === 'application/json'
+      ? JSON.parse(e.postData.contents)
+      : e.parameter;
+    const sheet = getLeadSheet_();
+    ensureHeaders_(sheet);
+    sheet.appendRow(HEADERS.map((key) => data[key] || ''));
+    return ContentService
+      .createTextOutput(JSON.stringify({ ok: true }))
+      .setMimeType(ContentService.MimeType.JSON);
+  } catch (err) {
+    return ContentService
+      .createTextOutput(JSON.stringify({ ok: false, error: String(err) }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
 }
 
-function doGet() {
-  return ContentService
-    .createTextOutput('AMK Care lead tracker is running.')
-    .setMimeType(ContentService.MimeType.TEXT);
+function getLeadSheet_() {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  return ss.getSheetByName(SHEET_NAME) || ss.insertSheet(SHEET_NAME);
+}
+
+function ensureHeaders_(sheet) {
+  const current = sheet.getRange(1, 1, 1, HEADERS.length).getValues()[0];
+  const hasHeaders = current.some(Boolean);
+  if (!hasHeaders) {
+    sheet.getRange(1, 1, 1, HEADERS.length).setValues([HEADERS]);
+    sheet.setFrozenRows(1);
+  }
 }

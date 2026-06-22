@@ -1,36 +1,21 @@
-# AMK Care Website V14
+# AMK Care Website V16
 
-Premium one-page website for AMK Care.
+Final multi-page professional build.
 
-Company name: AMK Care  
-Company number: 15313263  
-Main CTA: Request a Free Care Consultation
+## Added in V16
 
-## What is included
+- Dedicated `services.html` page.
+- Dedicated `join-amk-care.html` careers page with carer application form.
+- Removed the community/wine/drinks image from the public website flow.
+- Updated navigation and footer to support the full multi-page structure.
+- Updated JavaScript to handle both client enquiries and carer applications.
+- Updated Google Apps Script and CRM columns for mixed lead types.
+- Kept company number: 15313263.
 
-- Responsive homepage
-- Premium navy/gold AMK Care branding
-- Official AMK Care icon/logo assets
-- Real care moment images
-- Consultation form
-- Phone, email and WhatsApp enquiry paths
-- Google Sheet / CRM Apps Script template
-- Lead tracker CSV template
-- SEO files: sitemap.xml and robots.txt
-- Social media links
+## Final launch reminders
 
-## Files
-
-- `index.html` — main website
-- `styles.css` — design and responsive layout
-- `script.js` — menu, smooth scroll, form, email/WhatsApp and Google Sheet integration
-- `google-apps-script.js` — Google Sheet lead tracker backend
-- `lead-tracker-template.csv` — starter CRM structure
-- `CRM_AND_SEO_SETUP.md` — setup instructions
-- `sitemap.xml` — SEO sitemap
-- `robots.txt` — search engine instructions
-- `assets/` — images and logos
-
-## Before launch
-
-Confirm registered address, service areas, legal pages, regulatory status, and photo permissions.
+1. Add the Google Apps Script endpoint inside `script.js`.
+2. Confirm registered office address and regulatory wording.
+3. Review all policy pages with AMK before launch.
+4. Test on mobile, tablet, laptop and desktop.
+5. Connect the final domain and submit `sitemap.xml` to Google Search Console.

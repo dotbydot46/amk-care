@@ -1,97 +1,43 @@
-# AMK Care — Enquiry, Google Sheet/CRM and SEO Setup
+# AMK Care CRM & SEO Setup - V16
 
-Company name: AMK Care  
-Company number: 15313263  
-Main CTA: Request a Free Care Consultation
+## CRM setup
 
-## 1. Enquiry flow
+The website now has two form types:
 
-The website gives visitors four easy ways to enquire:
+1. Client care enquiry / free consultation
+2. Carer application / Join AMK Care
 
-- Consultation form
-- Phone contact
-- WhatsApp enquiry
-- Email enquiry
+Both can be saved into one Google Sheet using the `leadType` column.
 
-The form collects:
+### Steps
 
-- Full name
-- Phone number
-- Email address
-- Care location / postcode
-- Preferred contact method
-- Type of care
-- When care is needed
-- Message
-- Consent confirmation
+1. Create a Google Sheet.
+2. Open Extensions > Apps Script.
+3. Paste `google-apps-script.js`.
+4. Deploy as Web App.
+5. Set access to Anyone.
+6. Copy the Web App URL into `script.js` under `AMK_CONFIG.googleSheetEndpoint`.
 
-## 2. Connect form to Google Sheet / CRM
+## Recommended lead stages
 
-1. Create a new Google Sheet called `AMK Care Lead Tracker`.
-2. Rename the first tab to `Leads`.
-3. Open Extensions → Apps Script.
-4. Paste the content from `google-apps-script.js`.
-5. Replace `PASTE_YOUR_GOOGLE_SHEET_ID_HERE` with the Google Sheet ID from the spreadsheet URL.
-6. Click Deploy → New deployment → Web app.
-7. Set:
-   - Execute as: Me
-   - Who has access: Anyone
-8. Copy the Web App URL.
-9. Open `script.js` and paste the Web App URL into:
+### Client care enquiry
+New → Contacted → Consultation Booked → Assessment Done → Care Started → Closed
 
-```js
-googleSheetEndpoint: ''
-```
+### Carer application
+New → Contacted → Screening → Interview → Documents Required → Accepted → Not Suitable
 
-When connected, each website form enquiry can be saved into the private lead tracker.
+## SEO setup
 
-## 3. CRM status columns
+Submit `sitemap.xml` in Google Search Console after launch.
+Important pages:
 
-Use the status column like this:
+- Home
+- About
+- Services
+- Live-in Care
+- Pricing
+- Areas We Cover
+- Join AMK Care
+- Contact
 
-- New
-- Contacted
-- Consultation booked
-- Quote sent
-- Converted
-- Not suitable
-- Follow-up later
-
-## 4. SEO setup
-
-The website includes:
-
-- `robots.txt`
-- `sitemap.xml`
-- canonical link
-- page meta title and description
-- Open Graph tags for social sharing
-- Twitter card tags
-- LocalBusiness structured data
-- FAQ-friendly content
-- local care availability section
-- image alt text
-
-## 5. After launch
-
-Set up:
-
-- Google Search Console
-- Google Business Profile
-- Google Analytics, if required
-- review collection process
-- weekly social media posts linking back to the website
-
-## 6. Important checks before public launch
-
-Confirm before publishing:
-
-- registered address
-- service area
-- regulatory status
-- insurance / DBS / CQC wording if used
-- photo permissions
-- privacy policy
-- terms and conditions
-- complaints procedure
-- safeguarding statement
+Add verified service areas once AMK confirms them.
