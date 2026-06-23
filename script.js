@@ -1,10 +1,10 @@
-// AMK Care V19 - CRM-ready forms
+// AMK Care V20 - CRM connected forms
 // Multi-page launch behaviour: navigation, client enquiries, carer applications, CRM readiness, cookie consent and GA4 placeholders.
 const AMK_CONFIG = {
   email: 'help@amkcare.co.uk',
   phoneHref: '07852888932',
   whatsappNumber: '447852888932',
-  googleSheetEndpoint: 'https://script.google.com/macros/s/AKfycbwFl_4eBIAj5Pep_ybUzC39-W0ao1QgkAo2kevnUKRmx6nUKmRbpSM6oLvXX_d8tseN/exec', // Paste deployed Google Apps Script Web App URL here when ready.
+  googleSheetEndpoint: 'https://script.google.com/macros/s/AKfycbxS_ZrLWw6P4Pq-Sl1HbAnuYFOpB5XKHTlyquW7fblWcXYqoJZIJTdm3yEVU3XlOKOy/exec', // Connected Google Apps Script Web App URL.
   gaMeasurementId: '', // Optional: add GA4 ID, e.g. G-XXXXXXXXXX. Analytics loads only after cookie consent.
   companyNumber: '15313263'
 };

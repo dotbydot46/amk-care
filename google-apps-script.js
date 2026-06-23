@@ -18,7 +18,7 @@
 const CONFIG = {
   CLIENT_SHEET: 'Client Enquiries',
   CARER_SHEET: 'Carer Applications',
-  NOTIFY_EMAILS: ['amkcare26@gmail.com'],
+  NOTIFY_EMAILS: ['help@amkcare.co.uk'],
   COMPANY_NAME: 'AMK Care',
   COMPANY_NUMBER: '15313263'
 };

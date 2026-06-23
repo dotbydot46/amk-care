@@ -1,4 +1,4 @@
-# AMK Care Google Sheet CRM Setup - V19
+# AMK Care Google Sheet CRM Setup - V20
 
 This website can capture two types of leads:
 
@@ -37,7 +37,7 @@ Upload this file to Google Drive and open it with Google Sheets.
 12. Open website `script.js` and paste the URL into:
 
 ```js
-googleSheetEndpoint: 'PASTE_WEB_APP_URL_HERE'
+googleSheetEndpoint: 'https://script.google.com/macros/s/AKfycbxS_ZrLWw6P4Pq-Sl1HbAnuYFOpB5XKHTlyquW7fblWcXYqoJZIJTdm3yEVU3XlOKOy/exec'
 ```
 
 13. Upload the updated website files.
