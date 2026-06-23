@@ -1,4 +1,4 @@
-# AMK Care Website V16
+# AMK Care Website V17
 
 Final multi-page professional build.
 
@@ -19,3 +19,10 @@ Final multi-page professional build.
 3. Review all policy pages with AMK before launch.
 4. Test on mobile, tablet, laptop and desktop.
 5. Connect the final domain and submit `sitemap.xml` to Google Search Console.
+
+
+## V17 polish
+- Professional footer with contact and social icons.
+- Legal links redesigned to avoid awkward wrapping on desktop.
+- Contact cards improved with icons.
+- Desktop hero sizing and anchor offset polish.

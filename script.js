@@ -1,10 +1,10 @@
-// AMK Care V16
+// AMK Care V19 - CRM-ready forms
 // Multi-page launch behaviour: navigation, client enquiries, carer applications, CRM readiness, cookie consent and GA4 placeholders.
 const AMK_CONFIG = {
   email: 'help@amkcare.co.uk',
   phoneHref: '07852888932',
   whatsappNumber: '447852888932',
-  googleSheetEndpoint: '', // Paste deployed Google Apps Script Web App URL here when ready.
+  googleSheetEndpoint: 'https://script.google.com/macros/s/AKfycbwFl_4eBIAj5Pep_ybUzC39-W0ao1QgkAo2kevnUKRmx6nUKmRbpSM6oLvXX_d8tseN/exec', // Paste deployed Google Apps Script Web App URL here when ready.
   gaMeasurementId: '', // Optional: add GA4 ID, e.g. G-XXXXXXXXXX. Analytics loads only after cookie consent.
   companyNumber: '15313263'
 };
@@ -172,14 +172,31 @@ async function submitAMKForm(form, method) {
   if (!form.checkValidity()) { form.reportValidity(); return; }
   const payload = getFormPayload(form);
   const note = form.querySelector('.form-note') || document.querySelector('#form-note');
+  const hasEndpoint = AMK_CONFIG.googleSheetEndpoint && AMK_CONFIG.googleSheetEndpoint.startsWith('http');
+
+  if (note) note.textContent = 'Sending your enquiry...';
   const savedToSheet = await saveLeadToSheet(payload);
-  if (note) {
-    note.textContent = savedToSheet
-      ? 'Thank you. Your details have been saved to AMK Care’s private lead tracker. Opening your chosen contact method now.'
-      : 'Opening your chosen contact method. For final launch, add the Google Apps Script endpoint so enquiries are saved automatically.';
+
+  trackEvent(payload.leadType.toLowerCase().includes('carer') ? 'carer_application' : 'generate_lead', {
+    lead_source: method,
+    currency: 'GBP',
+    value: payload.leadType.toLowerCase().includes('carer') ? 0 : 1200
+  });
+
+  if (method === 'whatsapp') {
+    if (note) note.textContent = savedToSheet ? 'Thank you. Your details have been saved. Opening WhatsApp now.' : 'Opening WhatsApp now.';
+    openWhatsApp(payload);
+    return;
   }
-  trackEvent(payload.leadType.toLowerCase().includes('carer') ? 'carer_application' : 'generate_lead', { lead_source: method, currency: 'GBP', value: payload.leadType.toLowerCase().includes('carer') ? 0 : 1200 });
-  if (method === 'whatsapp') openWhatsApp(payload); else openEmail(payload);
+
+  if (hasEndpoint) {
+    if (note) note.textContent = 'Thank you. Your enquiry has been sent to AMK Care.';
+    window.location.href = 'thank-you.html';
+    return;
+  }
+
+  if (note) note.textContent = 'Opening your email app. After CRM setup, this form will submit automatically.';
+  openEmail(payload);
 }
 
 document.querySelectorAll('form[data-amk-form], #care-enquiry-form, #carer-application-form').forEach((form) => {

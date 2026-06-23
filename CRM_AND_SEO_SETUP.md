@@ -1,43 +1,58 @@
-# AMK Care CRM & SEO Setup - V16
+# AMK Care Google Sheet CRM Setup - V19
 
-## CRM setup
+This website can capture two types of leads:
 
-The website now has two form types:
+1. Client care enquiries / free consultations
+2. Carer applications from the Join AMK Care page
 
-1. Client care enquiry / free consultation
-2. Carer application / Join AMK Care
+The website form can send each submission into Google Sheets and email AMK Care automatically.
 
-Both can be saved into one Google Sheet using the `leadType` column.
+## Recommended Google Sheet tabs
 
-### Steps
+- Dashboard
+- Client Enquiries
+- Carer Applications
+- Lists
+- Instructions
 
-1. Create a Google Sheet.
-2. Open Extensions > Apps Script.
-3. Paste `google-apps-script.js`.
-4. Deploy as Web App.
-5. Set access to Anyone.
-6. Copy the Web App URL into `script.js` under `AMK_CONFIG.googleSheetEndpoint`.
+A ready-to-use Excel/Google Sheets template is included:
 
-## Recommended lead stages
+`AMK_Care_CRM_Template.xlsx`
 
-### Client care enquiry
-New → Contacted → Consultation Booked → Assessment Done → Care Started → Closed
+Upload this file to Google Drive and open it with Google Sheets.
 
-### Carer application
-New → Contacted → Screening → Interview → Documents Required → Accepted → Not Suitable
+## Setup steps
 
-## SEO setup
+1. Open Google Drive.
+2. Upload `AMK_Care_CRM_Template.xlsx`.
+3. Open it with Google Sheets.
+4. Go to Extensions > Apps Script.
+5. Delete any starter code and paste the full contents of `google-apps-script.js`.
+6. Confirm `NOTIFY_EMAILS` is correct. Default is `help@amkcare.co.uk`.
+7. Click Deploy > New deployment.
+8. Select type: Web app.
+9. Execute as: Me.
+10. Who has access: Anyone.
+11. Click Deploy and copy the Web App URL.
+12. Open website `script.js` and paste the URL into:
 
-Submit `sitemap.xml` in Google Search Console after launch.
-Important pages:
+```js
+googleSheetEndpoint: 'PASTE_WEB_APP_URL_HERE'
+```
 
-- Home
-- About
-- Services
-- Live-in Care
-- Pricing
-- Areas We Cover
-- Join AMK Care
-- Contact
+13. Upload the updated website files.
+14. Test the client enquiry form and carer application form.
 
-Add verified service areas once AMK confirms them.
+Google’s Apps Script documentation explains that web app deployments make a specific version of the script available for use, and that public-use deployments should be versioned deployments.
+
+## Daily workflow
+
+### Client enquiries
+New → Contacted → Consultation Booked → Assessment Done → Care Started → Not Suitable / Closed
+
+### Carer applications
+New → Contacted → Screening → Interview → Documents Required → Training → Accepted → Not Suitable / Closed
+
+## Privacy reminder
+
+Care enquiries can contain personal or sensitive family information. Only give Google Sheet access to trusted AMK Care staff who need it.
