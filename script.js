@@ -1,4 +1,4 @@
-// AMK Care V20 - CRM connected forms
+// AMK Care V21 - launch-ready forms and CRM connection
 // Multi-page launch behaviour: navigation, client enquiries, carer applications, CRM readiness, cookie consent and GA4 placeholders.
 const AMK_CONFIG = {
   email: 'help@amkcare.co.uk',
@@ -6,7 +6,8 @@ const AMK_CONFIG = {
   whatsappNumber: '447852888932',
   googleSheetEndpoint: 'https://script.google.com/macros/s/AKfycbxS_ZrLWw6P4Pq-Sl1HbAnuYFOpB5XKHTlyquW7fblWcXYqoJZIJTdm3yEVU3XlOKOy/exec', // Connected Google Apps Script Web App URL.
   gaMeasurementId: '', // Optional: add GA4 ID, e.g. G-XXXXXXXXXX. Analytics loads only after cookie consent.
-  companyNumber: '15313263'
+  companyNumber: '15313263',
+  companyName: 'AMK Care Service'
 };
 
 function encodeParams(params) {
@@ -49,7 +50,7 @@ function getFormPayload(form) {
 function buildLeadMessage(payload) {
   const isCarer = payload.leadType.toLowerCase().includes('carer');
   const lines = [
-    isCarer ? 'New AMK Care carer application' : 'New AMK Care free consultation request',
+    isCarer ? 'New AMK Care Service carer application' : 'New AMK Care Service free consultation request',
     '',
     `Lead type: ${payload.leadType}`,
     `Name: ${payload.name}`,
@@ -89,7 +90,7 @@ function saveLeadToSheet(payload) {
 }
 
 function openEmail(payload) {
-  const subject = payload.leadType.toLowerCase().includes('carer') ? 'AMK Care carer application' : 'AMK Care free consultation request';
+  const subject = payload.leadType.toLowerCase().includes('carer') ? 'AMK Care Service carer application' : 'AMK Care Service free consultation request';
   window.location.href = `mailto:${AMK_CONFIG.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(buildLeadMessage(payload))}`;
 }
 
@@ -180,7 +181,7 @@ async function submitAMKForm(form, method) {
   trackEvent(payload.leadType.toLowerCase().includes('carer') ? 'carer_application' : 'generate_lead', {
     lead_source: method,
     currency: 'GBP',
-    value: payload.leadType.toLowerCase().includes('carer') ? 0 : 1200
+    value: 0
   });
 
   if (method === 'whatsapp') {
@@ -190,7 +191,7 @@ async function submitAMKForm(form, method) {
   }
 
   if (hasEndpoint) {
-    if (note) note.textContent = 'Thank you. Your enquiry has been sent to AMK Care.';
+    if (note) note.textContent = 'Thank you. Your enquiry has been sent to AMK Care Service.';
     window.location.href = 'thank-you.html';
     return;
   }

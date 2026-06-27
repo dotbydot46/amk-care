@@ -1,16 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://amkcare.co.uk/</loc><priority>1.0</priority></url>
-  <url><loc>https://amkcare.co.uk/about.html</loc><priority>0.6</priority></url>
-  <url><loc>https://amkcare.co.uk/services.html</loc><priority>0.9</priority></url>
-  <url><loc>https://amkcare.co.uk/live-in-care.html</loc><priority>0.9</priority></url>
-  <url><loc>https://amkcare.co.uk/pricing.html</loc><priority>0.9</priority></url>
-  <url><loc>https://amkcare.co.uk/areas-we-cover.html</loc><priority>0.9</priority></url>
-  <url><loc>https://amkcare.co.uk/join-amk-care.html</loc><priority>0.9</priority></url>
-  <url><loc>https://amkcare.co.uk/contact.html</loc><priority>0.9</priority></url>
-  <url><loc>https://amkcare.co.uk/privacy-policy.html</loc><priority>0.6</priority></url>
-  <url><loc>https://amkcare.co.uk/cookie-policy.html</loc><priority>0.6</priority></url>
-  <url><loc>https://amkcare.co.uk/terms.html</loc><priority>0.6</priority></url>
-  <url><loc>https://amkcare.co.uk/complaints.html</loc><priority>0.6</priority></url>
-  <url><loc>https://amkcare.co.uk/safeguarding.html</loc><priority>0.6</priority></url>
+  <url><loc>https://amkcare.co.uk/about.html</loc><priority>0.8</priority></url>
+  <url><loc>https://amkcare.co.uk/services.html</loc><priority>0.8</priority></url>
+  <url><loc>https://amkcare.co.uk/live-in-care.html</loc><priority>0.8</priority></url>
+  <url><loc>https://amkcare.co.uk/personal-care.html</loc><priority>0.8</priority></url>
+  <url><loc>https://amkcare.co.uk/companionship-care.html</loc><priority>0.8</priority></url>
+  <url><loc>https://amkcare.co.uk/dementia-care.html</loc><priority>0.8</priority></url>
+  <url><loc>https://amkcare.co.uk/overnight-care.html</loc><priority>0.8</priority></url>
+  <url><loc>https://amkcare.co.uk/respite-care.html</loc><priority>0.8</priority></url>
+  <url><loc>https://amkcare.co.uk/hospital-to-home-care.html</loc><priority>0.8</priority></url>
+  <url><loc>https://amkcare.co.uk/end-of-life-care.html</loc><priority>0.8</priority></url>
+  <url><loc>https://amkcare.co.uk/medication-support.html</loc><priority>0.8</priority></url>
+  <url><loc>https://amkcare.co.uk/meal-preparation.html</loc><priority>0.8</priority></url>
+  <url><loc>https://amkcare.co.uk/household-support.html</loc><priority>0.8</priority></url>
+  <url><loc>https://amkcare.co.uk/mobility-assistance.html</loc><priority>0.8</priority></url>
+  <url><loc>https://amkcare.co.uk/pricing.html</loc><priority>0.8</priority></url>
+  <url><loc>https://amkcare.co.uk/areas-we-cover.html</loc><priority>0.8</priority></url>
+  <url><loc>https://amkcare.co.uk/join-amk-care.html</loc><priority>0.8</priority></url>
+  <url><loc>https://amkcare.co.uk/contact.html</loc><priority>0.8</priority></url>
+  <url><loc>https://amkcare.co.uk/privacy-policy.html</loc><priority>0.8</priority></url>
+  <url><loc>https://amkcare.co.uk/cookie-policy.html</loc><priority>0.8</priority></url>
+  <url><loc>https://amkcare.co.uk/terms.html</loc><priority>0.8</priority></url>
+  <url><loc>https://amkcare.co.uk/live-in-care-terms.html</loc><priority>0.8</priority></url>
+  <url><loc>https://amkcare.co.uk/accessibility-statement.html</loc><priority>0.8</priority></url>
+  <url><loc>https://amkcare.co.uk/complaints.html</loc><priority>0.8</priority></url>
+  <url><loc>https://amkcare.co.uk/safeguarding.html</loc><priority>0.8</priority></url>
+  <url><loc>https://amkcare.co.uk/thank-you.html</loc><priority>0.8</priority></url>
 </urlset>

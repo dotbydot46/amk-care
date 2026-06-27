@@ -1016,3 +1016,8 @@ html { scroll-padding-top: calc(var(--header-h) + 18px); }
   .footer--clean .footer-legal--clean { gap: 8px 12px; }
   .footer--clean .footer-legal-link { font-size: .9rem; }
 }
+
+
+/* V21 launch polish */
+.trust-points{display:flex;flex-wrap:wrap;gap:.65rem;margin:1rem 0 1.4rem}.trust-points span{border:1px solid rgba(183,145,74,.35);background:rgba(183,145,74,.08);border-radius:999px;padding:.55rem .85rem;font-weight:700;color:#06284e}.service-detail-list{display:grid;gap:.55rem;margin:1rem 0 1.5rem}.service-detail-list li{background:#f8f5ef;border-left:4px solid #b7914a;border-radius:10px;padding:.7rem .9rem}.price-panel__amount--text strong{font-size:clamp(1.6rem,4vw,2.6rem);line-height:1}.review-placeholder{border:1px dashed rgba(183,145,74,.45);background:#fffaf1;border-radius:18px;padding:1rem 1.2rem;color:#48566a}.footer-legal--clean{gap:.65rem 1rem}.contact-card-icon{font-family:inherit;font-weight:800;text-align:center}
+@media (max-width: 900px){.nav__menu a{font-size:1rem}.service-grid--page{grid-template-columns:1fr}.footer__grid--clean{gap:1.4rem}.legal-card h2{font-size:1.4rem}}

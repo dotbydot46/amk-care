@@ -1,13 +1,17 @@
-# AMK Care V18 QA Notes
+# AMK Care Service V21 QA Report
 
-## Completed in V18
-- Footer simplified for a cleaner professional look.
-- Removed footer link icons and legal-link icon pills to avoid visual clutter.
-- Kept contact-card icons on the Contact page, where they add value.
-- Kept Instagram/Facebook links in footer as clean text links.
-- Footer logo size and layout adjusted for desktop, tablet and mobile.
-- Checked the multi-page structure remains intact.
+## Completed
+- Updated company name and personalised quotation wording.
+- Removed fixed public pricing from public pages.
+- Added individual service pages and sitemap entries.
+- Added Accessibility Statement and Live-In Care Terms page.
+- Kept CRM endpoint connected in script.js.
+- Updated contact and carer forms for AMK's latest service list.
+- Removed wine/drinks imagery from public page flow.
 
-## Ready for next step
-- Connect care enquiry and carer application forms to Google Sheet / CRM endpoint.
-- Finalise confirmed address, service areas and regulatory/trust wording from AMK.
+## Still needs AMK confirmation
+- Registered office address.
+- Regulatory/CQC status and exact wording.
+- Final approval of legal pages.
+- Exact selected local Home Care areas.
+- Google Business Profile/review link.

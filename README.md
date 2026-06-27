@@ -1,28 +1,26 @@
-# AMK Care Website V17
+# AMK Care Service Website V21
 
-Final multi-page professional build.
+Final launch-preparation build based on AMK's supplied details.
 
-## Added in V16
+## Included
+- Multi-page professional website
+- Individual service pages
+- Join AMK Care carer application page
+- Client enquiry and carer forms connected to the existing Google Apps Script CRM endpoint
+- Personalised quotation pricing wording
+- Legal/trust pages: Privacy, Cookies, Terms, Live-In Care Terms, Accessibility, Complaints, Safeguarding
+- Updated sitemap and robots.txt
 
-- Dedicated `services.html` page.
-- Dedicated `join-amk-care.html` careers page with carer application form.
-- Removed the community/wine/drinks image from the public website flow.
-- Updated navigation and footer to support the full multi-page structure.
-- Updated JavaScript to handle both client enquiries and carer applications.
-- Updated Google Apps Script and CRM columns for mixed lead types.
-- Kept company number: 15313263.
+## Company details
+- Company name: AMK Care Service
+- Company number: 15313263
+- Registered office: to be confirmed
+- Email: help@amkcare.co.uk
+- Phone/WhatsApp: 07852 888 932
 
-## Final launch reminders
-
-1. Add the Google Apps Script endpoint inside `script.js`.
-2. Confirm registered office address and regulatory wording.
-3. Review all policy pages with AMK before launch.
-4. Test on mobile, tablet, laptop and desktop.
-5. Connect the final domain and submit `sitemap.xml` to Google Search Console.
-
-
-## V17 polish
-- Professional footer with contact and social icons.
-- Legal links redesigned to avoid awkward wrapping on desktop.
-- Contact cards improved with icons.
-- Desktop hero sizing and anchor offset polish.
+## Before final public launch
+- Confirm registered office address
+- Confirm final regulatory/CQC status
+- Review and approve legal/trust pages
+- Add Google Business Profile/review link when available
+- Replace placeholder/stock imagery with approved AMK photos when ready

@@ -1,13 +1,13 @@
 /**
- * AMK Care Google Sheets CRM Endpoint - V19
- * Saves website forms into Google Sheets and emails AMK Care.
+ * AMK Care Service Google Sheets CRM Endpoint - V21
+ * Saves website forms into Google Sheets and emails AMK Care Service.
  *
  * Supports:
  * 1) Client care enquiries / free consultations
  * 2) Carer applications / Join AMK Care
  *
  * Setup:
- * 1. Create/open the AMK Care Google Sheet.
+ * 1. Create/open the AMK Care Service Google Sheet.
  * 2. Extensions > Apps Script.
  * 3. Paste this whole file into Apps Script.
  * 4. Update NOTIFY_EMAILS if needed.
@@ -19,7 +19,7 @@ const CONFIG = {
   CLIENT_SHEET: 'Client Enquiries',
   CARER_SHEET: 'Carer Applications',
   NOTIFY_EMAILS: ['help@amkcare.co.uk'],
-  COMPANY_NAME: 'AMK Care',
+  COMPANY_NAME: 'AMK Care Service',
   COMPANY_NUMBER: '15313263'
 };
 
@@ -112,14 +112,14 @@ function ensureHeaders_(sheet, headers) {
 
 function sendNotification_(data, isCarer) {
   if (!CONFIG.NOTIFY_EMAILS || !CONFIG.NOTIFY_EMAILS.length) return;
-  const subject = isCarer ? 'New AMK Care carer application' : 'New AMK Care care consultation request';
+  const subject = isCarer ? 'New AMK Care Service carer application' : 'New AMK Care Service care consultation request';
   const body = buildEmailBody_(data, isCarer);
-  MailApp.sendEmail({ to: CONFIG.NOTIFY_EMAILS.join(','), subject, body, name: 'AMK Care Website' });
+  MailApp.sendEmail({ to: CONFIG.NOTIFY_EMAILS.join(','), subject, body, name: 'AMK Care Service Website' });
 }
 
 function buildEmailBody_(data, isCarer) {
   const lines = [
-    isCarer ? 'New carer application from the AMK Care website.' : 'New care consultation request from the AMK Care website.',
+    isCarer ? 'New carer application from the AMK Care Service website.' : 'New care consultation request from the AMK Care Service website.',
     '',
     `Name: ${data.name}`,
     `Phone: ${data.phone}`,
@@ -158,7 +158,7 @@ function testClientLead() {
   doPost({ parameter: {
     leadType: 'Care enquiry', name: 'Test Client', phone: '07852 888 932', email: 'test@example.com',
     location: 'London', preferredContact: 'Phone call', careType: 'Live-in care', whenNeeded: 'As soon as possible',
-    message: 'Testing AMK Care client enquiry form.'
+    message: 'Testing AMK Care Service client enquiry form.'
   }});
 }
 
@@ -167,6 +167,6 @@ function testCarerLead() {
     leadType: 'Carer application', name: 'Test Carer', phone: '07123 456 789', email: 'carer@example.com',
     location: 'Kent', experience: 'Yes', roleInterest: 'Live-in Carer', availability: 'Full-time',
     rightToWork: 'Yes', dbs: 'Yes', references: 'Yes', drive: 'No',
-    message: 'Testing AMK Care carer application form.'
+    message: 'Testing AMK Care Service carer application form.'
   }});
 }
