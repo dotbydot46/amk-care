@@ -1,26 +1,20 @@
-# AMK Care Service Website V21
+# AMK Care Service Website V22
 
-Final launch-preparation build based on AMK's supplied details.
+Professional launch-ready build based on the approved AMK Care Service design.
 
 ## Included
-- Multi-page professional website
+- Multi-page public website
+- Client care enquiry form connected to Google Sheet CRM endpoint
+- Join AMK Care page with carer application form
 - Individual service pages
-- Join AMK Care carer application page
-- Client enquiry and carer forms connected to the existing Google Apps Script CRM endpoint
-- Personalised quotation pricing wording
-- Legal/trust pages: Privacy, Cookies, Terms, Live-In Care Terms, Accessibility, Complaints, Safeguarding
-- Updated sitemap and robots.txt
+- Legal/trust pages
+- Cookie banner and accessibility statement
+- Sitemap, robots.txt and SEO metadata
+- V22 trust/growth polish: top contact bar, professional standards section, honest reviews placeholder, improved service icons and clearer family/carer funnels
 
-## Company details
-- Company name: AMK Care Service
-- Company number: 15313263
-- Registered office: to be confirmed
-- Email: help@amkcare.co.uk
-- Phone/WhatsApp: 07852 888 932
-
-## Before final public launch
-- Confirm registered office address
-- Confirm final regulatory/CQC status
-- Review and approve legal/trust pages
-- Add Google Business Profile/review link when available
-- Replace placeholder/stock imagery with approved AMK photos when ready
+## Still required from AMK before final public launch
+- Registered office address
+- Confirmed CQC/regulatory wording if applicable
+- Exact selected Home Care local areas
+- Google Business Profile / review link
+- AMK approval of legal pages

@@ -1,4 +1,4 @@
-// AMK Care V21 - launch-ready forms and CRM connection
+// AMK Care V22 - launch-ready forms and CRM connection
 // Multi-page launch behaviour: navigation, client enquiries, carer applications, CRM readiness, cookie consent and GA4 placeholders.
 const AMK_CONFIG = {
   email: 'help@amkcare.co.uk',
@@ -136,6 +136,20 @@ document.querySelectorAll('a[href*="#"]').forEach((anchor) => {
     history.replaceState(null, '', targetId);
   });
 });
+
+
+function setActiveNavLink() {
+  const currentFile = (window.location.pathname.split('/').pop() || 'index.html').replace(/\/$/, 'index.html');
+  document.querySelectorAll('.nav__menu a[href]').forEach((link) => {
+    const href = link.getAttribute('href');
+    if (!href || href.startsWith('http') || href.startsWith('tel:') || href.startsWith('mailto:')) return;
+    const linkFile = (href.split('#')[0] || 'index.html');
+    if (linkFile === currentFile || (currentFile === '' && linkFile === 'index.html')) {
+      link.setAttribute('aria-current', 'page');
+    }
+  });
+}
+setActiveNavLink();
 
 const toggle = document.querySelector('.nav-toggle');
 const menu = document.querySelector('#nav-menu');

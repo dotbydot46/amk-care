@@ -1,17 +1,20 @@
-# AMK Care Service V21 QA Report
+# AMK Care Service V22 QA Notes
 
 ## Completed
-- Updated company name and personalised quotation wording.
-- Removed fixed public pricing from public pages.
-- Added individual service pages and sitemap entries.
-- Added Accessibility Statement and Live-In Care Terms page.
-- Kept CRM endpoint connected in script.js.
-- Updated contact and carer forms for AMK's latest service list.
-- Removed wine/drinks imagery from public page flow.
+- CRM endpoint retained in script.js
+- Fixed SVG viewBox casing
+- Added active navigation state
+- Added professional standards section without unconfirmed CQC wording
+- Added honest reviews/testimonials placeholder only
+- Improved homepage headline and service icon variety
+- Added top contact bar for desktop while hiding it on mobile
+- Kept mobile floating Contact / WhatsApp actions
+- Removed fixed pricing and kept personalised quotation wording
 
-## Still needs AMK confirmation
-- Registered office address.
-- Regulatory/CQC status and exact wording.
-- Final approval of legal pages.
-- Exact selected local Home Care areas.
-- Google Business Profile/review link.
+## Check after upload
+1. Home page desktop hero and top bar
+2. Mobile menu and floating buttons
+3. Contact form saves to Client Enquiries sheet
+4. Join AMK Care form saves to Carer Applications sheet
+5. Footer legal links
+6. Sitemap URL paths after connecting amkcare.co.uk
