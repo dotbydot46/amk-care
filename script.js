@@ -185,56 +185,37 @@ if ('IntersectionObserver' in window) {
 
 async function submitAMKForm(form, method) {
   if (!form.checkValidity()) { form.reportValidity(); return; }
-  if (form.dataset.submitting === 'true') return;
-
   const payload = getFormPayload(form);
   const note = form.querySelector('.form-note') || document.querySelector('#form-note');
   const hasEndpoint = AMK_CONFIG.googleSheetEndpoint && AMK_CONFIG.googleSheetEndpoint.startsWith('http');
-  const buttons = form.querySelectorAll('button[type="submit"], [data-whatsapp-submit], #whatsapp-enquiry');
 
-  form.dataset.submitting = 'true';
-  form.setAttribute('aria-busy', 'true');
-  buttons.forEach((button) => { button.disabled = true; });
+  if (note) note.textContent = 'Sending your enquiry...';
+  const savedToSheet = await saveLeadToSheet(payload);
 
-  try {
-    if (note) note.textContent = 'Sending your enquiry...';
-    const savedToSheet = await saveLeadToSheet(payload);
+  trackEvent(payload.leadType.toLowerCase().includes('carer') ? 'carer_application' : 'generate_lead', {
+    lead_source: method,
+    currency: 'GBP',
+    value: 0
+  });
 
-    trackEvent(payload.leadType.toLowerCase().includes('carer') ? 'carer_application' : 'generate_lead', {
-      lead_source: method,
-      currency: 'GBP',
-      value: 0
-    });
-
-    if (method === 'whatsapp') {
-      if (note) note.textContent = savedToSheet ? 'Thank you. Your details have been saved. Opening WhatsApp now.' : 'Opening WhatsApp now.';
-      openWhatsApp(payload);
-      return;
-    }
-
-    if (hasEndpoint && savedToSheet) {
-      if (note) note.textContent = 'Thank you. Your enquiry has been sent to AMK Care Service.';
-      window.location.href = 'thank-you.html';
-      return;
-    }
-
-    if (hasEndpoint && !savedToSheet) {
-      if (note) note.textContent = 'We could not confirm automatic submission. Opening your email app as a backup.';
-      openEmail(payload);
-      return;
-    }
-
-    if (note) note.textContent = 'Opening your email app. After CRM setup, this form will submit automatically.';
-    openEmail(payload);
-  } finally {
-    delete form.dataset.submitting;
-    form.setAttribute('aria-busy', 'false');
-    buttons.forEach((button) => { button.disabled = false; });
+  if (method === 'whatsapp') {
+    if (note) note.textContent = savedToSheet ? 'Thank you. Your details have been saved. Opening WhatsApp now.' : 'Opening WhatsApp now.';
+    openWhatsApp(payload);
+    return;
   }
+
+  if (hasEndpoint) {
+    if (note) note.textContent = 'Thank you. Your enquiry has been sent to AMK Care Service.';
+    window.location.href = 'thank-you.html';
+    return;
+  }
+
+  if (note) note.textContent = 'Opening your email app. After CRM setup, this form will submit automatically.';
+  openEmail(payload);
 }
 
 document.querySelectorAll('form[data-amk-form], #care-enquiry-form, #carer-application-form').forEach((form) => {
-  form.addEventListener('submit', (event) => { event.preventDefault(); submitAMKForm(form, 'form'); });
+  form.addEventListener('submit', (event) => { event.preventDefault(); submitAMKForm(form, 'email'); });
   form.querySelectorAll('[data-whatsapp-submit], #whatsapp-enquiry').forEach((btn) => {
     btn.addEventListener('click', () => submitAMKForm(form, 'whatsapp'));
   });

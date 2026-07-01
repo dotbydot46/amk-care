@@ -1,31 +1,29 @@
-# AMK Care Service V22 QA Notes
+# AMK Care Service QA Report — V24 Final Review
 
-## Completed
-- CRM endpoint retained in script.js
-- Fixed SVG viewBox casing
-- Added active navigation state
-- Added professional standards section without unconfirmed CQC wording
-- Added honest reviews/testimonials placeholder only
-- Improved homepage headline and service icon variety
-- Added top contact bar for desktop while hiding it on mobile
-- Kept mobile floating Contact / WhatsApp actions
-- Removed fixed pricing and kept personalised quotation wording
-- Removed unfinished public footer and company-detail placeholder copy
-- Added `noindex` to the thank-you page and removed it from `sitemap.xml`
-- Improved form submit handling with duplicate-click protection and email fallback if the CRM endpoint cannot be reached
-- Replaced contact-page symbol icons with consistent SVG icons
-- Added dependency-free static launch checker at `tools/launch-check.mjs`
+## Static checks completed
+- HTML pages checked: 27
+- Missing page titles: 0
+- Missing meta descriptions: 0
+- Broken local links/assets found: 0
+- Missing page anchors found: 0
+- JavaScript syntax check: passed
+- CRM endpoint present: Yes
 
-## Local checks
-- `node --check script.js`
-- `node tools/launch-check.mjs`
+## User-reported design areas reviewed
+- Safeguarding Procedures icon changed to a clearer shield-and-heart icon.
+- Service card buttons checked and kept aligned.
+- Pricing/quotation section checked and kept clean.
+- Professional Standards cards checked for clearer icon meaning.
+- Contact cards kept with clean icons.
+- Footer kept clean without unnecessary icons.
 
-## Check after upload
-1. Home page desktop hero and top bar
-2. Mobile menu and floating buttons
-3. Contact form saves to Client Enquiries sheet
-4. Join AMK Care form saves to Carer Applications sheet
-5. Footer legal links
-6. Sitemap URL paths after connecting amkcare.co.uk
-7. Registered office, jurisdiction, and full company legal name/status are displayed once confirmed by AMK
-8. CQC/regulatory wording is added only after registration/scope is confirmed
+## Forms/CRM
+The CRM endpoint is connected in `script.js`. After uploading, test:
+1. Client enquiry form
+2. Carer application form
+3. Thank-you page redirect
+4. Email notification
+5. Google Sheet row creation
+
+## Final launch notes
+AMK should still confirm registered office address, selected Home Care areas, regulatory wording, Google Business Profile link, and final legal page approval.
