@@ -1,4 +1,4 @@
-# AMK Care V20 — CRM Connected
+# AMK Care V20, CRM Connected
 
 This version has the Google Apps Script Web App URL added to `script.js`, so the client consultation form and carer application form can save submissions to the AMK Care Google Sheet CRM.
 

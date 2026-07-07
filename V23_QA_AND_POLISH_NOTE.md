@@ -1,4 +1,4 @@
-# AMK Care Service V23 — QA & Professional Polish
+# AMK Care Service V23, QA & Professional Polish
 
 ## Purpose
 V23 is based on V22 and focuses on professional UI polish, trust-building sections, contact usability, and launch QA.

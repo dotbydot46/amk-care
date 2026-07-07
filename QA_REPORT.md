@@ -1,29 +1,38 @@
-# AMK Care Service QA Report — V24 Final Review
+# AMK Care Website V25 QA Report
 
-## Static checks completed
-- HTML pages checked: 27
-- Missing page titles: 0
-- Missing meta descriptions: 0
-- Broken local links/assets found: 0
-- Missing page anchors found: 0
-- JavaScript syntax check: passed
-- CRM endpoint present: Yes
+## Automated checks completed
 
-## User-reported design areas reviewed
-- Safeguarding Procedures icon changed to a clearer shield-and-heart icon.
-- Service card buttons checked and kept aligned.
-- Pricing/quotation section checked and kept clean.
-- Professional Standards cards checked for clearer icon meaning.
-- Contact cards kept with clean icons.
-- Footer kept clean without unnecessary icons.
+- Local page links checked: no missing local HTML files found.
+- Local asset references checked: no missing image, CSS or JavaScript files found.
+- Anchor links checked: no missing local anchors found.
+- JavaScript syntax checked with Node: passed.
+- Visible public text checked for em dashes, en dashes and hyphenated wording requested for removal: passed.
+- Google Sheet CRM endpoint still present in `script.js`.
 
-## Forms/CRM
-The CRM endpoint is connected in `script.js`. After uploading, test:
-1. Client enquiry form
-2. Carer application form
-3. Thank-you page redirect
-4. Email notification
-5. Google Sheet row creation
+## Manual review focus
 
-## Final launch notes
-AMK should still confirm registered office address, selected Home Care areas, regulatory wording, Google Business Profile link, and final legal page approval.
+Please check after GitHub upload:
+
+1. Homepage hero on desktop and mobile.
+2. Header and mobile menu.
+3. Services page and service cards.
+4. Pricing page and consultation wording.
+5. Contact form submission to Google Sheet CRM.
+6. Join AMK Care form submission to Google Sheet CRM.
+7. WhatsApp and phone buttons.
+8. Footer and legal links.
+
+## Remaining AMK confirmations
+
+- Registered office address.
+- Exact local home care areas.
+- Regulatory or CQC wording, if applicable.
+- Google Business Profile and review link.
+- Final approval of legal pages.
+
+
+## V26 QA
+- Checked local asset references after adding new WebP images.
+- Checked common visible dash style wording.
+- Checked JavaScript syntax with node --check.
+- Homepage and About page content revised for warmer, more human copy.

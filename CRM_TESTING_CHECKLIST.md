@@ -25,6 +25,6 @@ After connecting the Google Apps Script URL:
 
 ## Final checks
 - Change test lead status in Sheet.
-- Add follow-up date.
+- Add follow up date.
 - Add notes.
 - Delete test submissions before launch if needed.

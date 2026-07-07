@@ -1,4 +1,4 @@
-# AMK Care Service V24 — Final Review Note
+# AMK Care Service V24, Final Review Note
 
 This version is based on V23 and focuses on the final professional polish before showing AMK Care.
 
