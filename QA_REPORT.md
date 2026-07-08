@@ -36,3 +36,10 @@ Please check after GitHub upload:
 - Checked common visible dash style wording.
 - Checked JavaScript syntax with node --check.
 - Homepage and About page content revised for warmer, more human copy.
+
+
+## V28 Photo integration checks
+- Added relevant page imagery for Join AMK Care, Services and Live in Care.
+- Confirmed new image assets exist in `/assets`.
+- CSS includes responsive handling for desktop, tablet and mobile.
+- CRM endpoint and form markup were not changed.
