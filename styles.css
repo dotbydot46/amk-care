@@ -2027,3 +2027,65 @@ html { scroll-padding-top: calc(var(--header-h) + 18px); }
 .hero__quote-card{display:none!important}
 @media (max-width:900px){.hero__visual--v26{min-height:auto;border-radius:28px}.hero__visual--v26 img{min-height:0;aspect-ratio:4/3;object-position:center}}
 @media (max-width:600px){.hero__visual--v26{border-radius:24px}.hero__visual--v26 img{aspect-ratio:5/4}.hero__checks--calm{margin-bottom:1.25rem}}
+
+
+/* V30 final CTA and heading scale polish */
+.care-page-hero__copy h1 {
+  font-size: clamp(2.7rem, 4.15vw, 4.55rem);
+  line-height: 1.02;
+  max-width: 13ch;
+  text-wrap: balance;
+}
+.care-page-hero__copy .lead {
+  max-width: 38rem;
+  font-size: clamp(1.03rem, 1.25vw, 1.18rem);
+  line-height: 1.72;
+}
+.legal-hero h1 {
+  font-size: clamp(2.65rem, 4.25vw, 4.35rem);
+  line-height: 1.04;
+  max-width: 16ch;
+  text-wrap: balance;
+}
+.hero--v26 h1,
+.about-hero-v26 h1 {
+  font-size: clamp(3.25rem, 4.75vw, 5.15rem);
+  line-height: .98;
+  text-wrap: balance;
+}
+.section-heading h2,
+.cta-strip h2,
+.contact-copy h2,
+.contact-form h2,
+.legal-card h2 {
+  text-wrap: balance;
+}
+.site-header .btn--small {
+  font-size: .9rem;
+  padding-inline: 1rem;
+  white-space: nowrap;
+}
+@media (max-width: 1100px) {
+  .site-header .btn--small { font-size: .82rem; padding-inline: .85rem; }
+  .care-page-hero__copy h1 { font-size: clamp(2.55rem, 5.6vw, 4rem); }
+}
+@media (max-width: 760px) {
+  .care-page-hero__copy h1,
+  .legal-hero h1 {
+    font-size: clamp(2.15rem, 10.5vw, 3.15rem);
+    max-width: 100%;
+    line-height: 1.06;
+  }
+  .hero--v26 h1,
+  .about-hero-v26 h1 {
+    font-size: clamp(2.65rem, 12vw, 3.75rem);
+    line-height: 1.01;
+  }
+  .care-page-hero__copy .lead { font-size: 1rem; line-height: 1.65; }
+}
+@media (max-width: 430px) {
+  .care-page-hero__copy h1,
+  .legal-hero h1 { font-size: clamp(2rem, 10vw, 2.65rem); }
+  .hero--v26 h1,
+  .about-hero-v26 h1 { font-size: clamp(2.4rem, 11vw, 3.2rem); }
+}
