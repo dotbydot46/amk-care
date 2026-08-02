@@ -7,7 +7,9 @@ const AMK_CONFIG = {
   googleSheetEndpoint: 'https://script.google.com/macros/s/AKfycbxS_ZrLWw6P4Pq-Sl1HbAnuYFOpB5XKHTlyquW7fblWcXYqoJZIJTdm3yEVU3XlOKOy/exec', // Connected Google Apps Script Web App URL.
   gaMeasurementId: '', // Optional: add GA4 ID, e.g. G-XXXXXXXXXX. Analytics loads only after cookie consent.
   companyNumber: '15313263',
-  companyName: 'AMK Care Service'
+  companyName: 'AMK Care Service',
+  legalCompanyName: 'A M KNOWLEDGE CARE SERVICES LIMITED',
+  registeredOffice: 'Hall Farm Office, London Road, Weston, NR34 8TT, United Kingdom'
 };
 
 function encodeParams(params) {
@@ -137,7 +139,6 @@ document.querySelectorAll('a[href*="#"]').forEach((anchor) => {
   });
 });
 
-
 function setActiveNavLink() {
   const currentFile = (window.location.pathname.split('/').pop() || 'index.html').replace(/\/$/, 'index.html');
   document.querySelectorAll('.nav__menu a[href]').forEach((link) => {
@@ -169,6 +170,13 @@ document.querySelectorAll('a[href*="wa.me"]').forEach((link) => link.addEventLis
 
 const yearEl = document.querySelector('#year');
 if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+// Keep the confirmed legal company details consistent across all pages.
+document.querySelectorAll('.footer-small').forEach((element) => {
+  if (element.textContent.includes('Company number:')) {
+    element.innerHTML = `AMK Care Service is operated by <strong>${AMK_CONFIG.legalCompanyName}</strong>. Company number: <strong>${AMK_CONFIG.companyNumber}</strong>. Registered office: ${AMK_CONFIG.registeredOffice}.`;
+  }
+});
 
 const revealEls = document.querySelectorAll('.reveal');
 if ('IntersectionObserver' in window) {
