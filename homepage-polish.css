@@ -120,3 +120,77 @@
   .homepage-v3 .wellbeing-card:hover,
   .homepage-v3 .btn:hover{transform:none}
 }
+
+/* Final mobile QA — intentionally limited to narrow screens. */
+@media (max-width:680px){
+  .homepage-v3{
+    padding-bottom:calc(68px + env(safe-area-inset-bottom));
+    -webkit-text-size-adjust:100%;
+  }
+
+  .homepage-v3 .nav__menu{
+    max-height:calc(100svh - var(--header-h) - 24px);
+    overflow-y:auto;
+    overscroll-behavior:contain;
+  }
+
+  .homepage-v3 .service-grid{
+    grid-auto-rows:auto;
+  }
+  .homepage-v3 .service-card{
+    height:auto;
+    min-height:0;
+    padding:24px 22px;
+  }
+  .homepage-v3 .service-card .service-icon{
+    margin-bottom:18px;
+    font-size:1.35rem;
+    line-height:1;
+  }
+  .homepage-v3 .service-card p{
+    margin-bottom:18px;
+  }
+  .homepage-v3 .service-card>.text-link{
+    min-height:50px;
+    margin-top:0;
+    padding:12px 16px;
+  }
+
+  .homepage-v3 .family-time__grid{
+    gap:28px;
+  }
+  .homepage-v3 .family-time__copy h2{
+    font-size:clamp(2rem,10vw,2.65rem);
+    line-height:1.04;
+  }
+  .homepage-v3 .family-time__copy p{
+    font-size:1rem;
+    line-height:1.65;
+  }
+  .homepage-v3 .family-time__benefits>div{
+    padding:18px;
+  }
+
+  .homepage-v3 .floating-actions{
+    left:12px;
+    right:12px;
+    bottom:calc(8px + env(safe-area-inset-bottom));
+    gap:8px;
+  }
+  .homepage-v3 .floating-actions a{
+    min-height:46px;
+    padding:0 12px;
+    font-size:.95rem;
+    box-shadow:0 10px 24px rgba(5,37,74,.22);
+  }
+}
+
+@media (max-width:390px){
+  .homepage-v3 .floating-actions a{
+    font-size:.9rem;
+    padding-inline:9px;
+  }
+  .homepage-v3 .service-card{
+    padding:22px 20px;
+  }
+}
