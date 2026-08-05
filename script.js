@@ -1,4 +1,4 @@
-// AMK Care V22 - launch-ready forms and CRM connection
+// AMK Care V23 - launch-ready forms, CRM connection and confirmed UK coverage
 // Multi-page launch behaviour: navigation, client enquiries, carer applications, CRM readiness, cookie consent and GA4 placeholders.
 const AMK_CONFIG = {
   email: 'help@amkcare.co.uk',
@@ -281,7 +281,49 @@ if (rejectCookies) rejectCookies.addEventListener('click', () => { localStorage.
     if (companyNotice) {
       companyNotice.innerHTML = `AMK Care Service is operated by <strong>${AMK_CONFIG.legalCompanyName}</strong>. Registered office: ${AMK_CONFIG.registeredOffice}.`;
     }
-    const description = 'Learn about AMK Care Service, providing personalised live in care across England and home care in selected local areas.';
+    const description = 'Learn about AMK Care Service, providing personalised live in care and home care support throughout the UK.';
+    setMeta('meta[name="description"]', description);
+    setMeta('meta[property="og:description"]', description);
+    setMeta('meta[name="twitter:description"]', description);
+  }
+
+  // Confirmed by AMK Care Service: care is offered throughout the UK, subject to assessment and availability.
+  const confirmedCoverageText = new Map([
+    ['Live in care across England', 'Live in care across the UK'],
+    ['AMK Care Service provides live in care across England and home care in selected local areas.', 'AMK Care Service provides live in care and home care throughout the UK, subject to assessment and availability.'],
+    ['Live in Care throughout England.', 'Live in Care throughout the UK.'],
+    ['AMK Care Service provides Live in Care throughout England.', 'AMK Care Service provides Live in Care throughout the UK.'],
+    ['Home Care services are currently available within selected local areas and continue to expand.', 'Home care is available throughout the UK, subject to assessment and suitable carer availability.'],
+    ['AMK Care Service provides live in care throughout England, subject to assessment and availability.', 'AMK Care Service provides live in care throughout the UK, subject to assessment and suitable carer availability.'],
+    ['Live in care is available across England. Home care is currently offered in selected local areas. Families elsewhere in the UK are welcome to contact us so current availability can be discussed accurately.', 'Live in care and home care support are available throughout the UK, subject to assessment and suitable carer availability in the requested area.'],
+    ['AMK Care Service currently advertises live in care across England and home care in selected local areas. Contact the team if support is needed elsewhere in the UK so current availability can be checked.', 'Yes. AMK Care Service provides care throughout the UK, subject to assessment and suitable carer availability in the requested area.']
+  ]);
+
+  document.querySelectorAll('h1, h2, h3, p, li, strong, span').forEach((element) => {
+    const replacement = confirmedCoverageText.get(element.textContent.trim());
+    if (replacement) element.textContent = replacement;
+  });
+
+  if (currentPage === 'index.html' || currentPage === '') {
+    const description = 'AMK Care Service provides personalised live in care and home care support throughout the UK, with thoughtful attention to nutrition, mobility, daily routines and family peace of mind.';
+    setMeta('meta[name="description"]', description);
+
+    const structuredData = document.querySelector('script[type="application/ld+json"]');
+    if (structuredData) {
+      try {
+        const data = JSON.parse(structuredData.textContent);
+        const graph = Array.isArray(data['@graph']) ? data['@graph'] : [];
+        const service = graph.find((item) => item['@type'] === 'Service');
+        if (service) service.areaServed = { '@type': 'Country', name: 'United Kingdom' };
+        structuredData.textContent = JSON.stringify(data);
+      } catch (error) {
+        console.warn('AMK Care structured data could not be updated.', error);
+      }
+    }
+  }
+
+  if (currentPage === 'areas-we-cover.html') {
+    const description = 'AMK Care Service provides live in care and home care support throughout the UK, subject to assessment and suitable carer availability.';
     setMeta('meta[name="description"]', description);
     setMeta('meta[property="og:description"]', description);
     setMeta('meta[name="twitter:description"]', description);
@@ -373,7 +415,7 @@ if (rejectCookies) rejectCookies.addEventListener('click', () => { localStorage.
       'Support with daily routines, meals and personal comfort',
       'Support with daily routines, meals, hydration, mobility and personal comfort where included in the care plan'
     );
-    const description = 'Live in Care from AMK Care Service, with ongoing companionship and personalised support shaped around the agreed care plan.';
+    const description = 'Live in Care from AMK Care Service, with ongoing companionship and personalised support available throughout the UK, subject to assessment and availability.';
     setMeta('meta[name="description"]', description);
     setMeta('meta[property="og:description"]', description);
     setMeta('meta[name="twitter:description"]', description);
