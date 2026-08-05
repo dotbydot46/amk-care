@@ -218,7 +218,7 @@ async function submitAMKForm(form, method) {
     return;
   }
 
-  if (note) note.textContent = 'Opening your email app. After CRM setup, this form will submit automatically.';
+  if (note) note.textContent = 'Opening your email app. Please review the message and press send.';
   openEmail(payload);
 }
 
@@ -235,3 +235,169 @@ const rejectCookies = document.querySelector('#reject-cookies');
 if (cookieBanner && !localStorage.getItem('amk_cookie_consent')) cookieBanner.hidden = false;
 if (acceptCookies) acceptCookies.addEventListener('click', () => { localStorage.setItem('amk_cookie_consent', 'accepted'); if (cookieBanner) cookieBanner.hidden = true; loadAnalyticsIfConsented(); });
 if (rejectCookies) rejectCookies.addEventListener('click', () => { localStorage.setItem('amk_cookie_consent', 'essential'); if (cookieBanner) cookieBanner.hidden = true; });
+
+// Final public-release QA. This is intentionally narrow: it removes internal notes,
+// corrects a few visitor-facing phrases and keeps the existing design and journeys intact.
+(function applyFinalPublicQualityPolish() {
+  const currentPage = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
+
+  const setMeta = (selector, value) => {
+    const element = document.querySelector(selector);
+    if (element) element.setAttribute('content', value);
+  };
+
+  const replaceText = (selector, original, replacement) => {
+    document.querySelectorAll(selector).forEach((element) => {
+      if (element.textContent.trim() === original) element.textContent = replacement;
+    });
+  };
+
+  const markRequiredFields = (form) => {
+    if (!form) return;
+    const heading = form.querySelector('h2, h3');
+    if (heading && !form.querySelector('.form-required-note')) {
+      const note = document.createElement('p');
+      note.className = 'form-note form-required-note';
+      note.textContent = 'Fields marked * are required.';
+      heading.insertAdjacentElement('afterend', note);
+    }
+    form.querySelectorAll('input[required], select[required], textarea[required]').forEach((field) => {
+      if (field.type === 'checkbox') return;
+      const label = field.closest('label');
+      if (!label || label.dataset.requiredMarked === 'true') return;
+      const star = document.createElement('span');
+      star.textContent = ' *';
+      star.setAttribute('aria-hidden', 'true');
+      star.style.color = '#9b451f';
+      star.style.fontWeight = '800';
+      label.insertBefore(star, field);
+      label.dataset.requiredMarked = 'true';
+    });
+  };
+
+  // Replace the About page's temporary company note with confirmed details.
+  if (currentPage === 'about.html') {
+    const companyNotice = document.querySelector('.company-details-v26 .notice');
+    if (companyNotice) {
+      companyNotice.innerHTML = `AMK Care Service is operated by <strong>${AMK_CONFIG.legalCompanyName}</strong>. Registered office: ${AMK_CONFIG.registeredOffice}.`;
+    }
+    const description = 'Learn about AMK Care Service, providing personalised live in care across England and home care in selected local areas.';
+    setMeta('meta[name="description"]', description);
+    setMeta('meta[property="og:description"]', description);
+    setMeta('meta[name="twitter:description"]', description);
+  }
+
+  // Remove public-facing development notes while preserving real service disclaimers.
+  document.querySelectorAll('.footer-col .footer-small').forEach((element) => {
+    const text = element.textContent.toLowerCase();
+    if (text.includes('regulatory wording') || text.includes('registration details')) element.remove();
+  });
+
+  document.querySelectorAll('.notice').forEach((element) => {
+    const text = element.textContent.trim().toLowerCase();
+    const isInternalNote =
+      text.includes('before final launch') ||
+      text.includes('before launch') ||
+      text.includes('after an accessibility audit') ||
+      text.includes('google analytics should only be connected once') ||
+      text.includes('final regulatory wording will be added');
+    if (isInternalNote) element.remove();
+  });
+
+  // Areas page: remove the internal SEO planning paragraph.
+  if (currentPage === 'areas-we-cover.html') {
+    document.querySelectorAll('.legal-card h2').forEach((heading) => {
+      if (heading.textContent.trim().toLowerCase() === 'local seo note') {
+        const next = heading.nextElementSibling;
+        if (next && next.tagName === 'P') next.remove();
+        heading.remove();
+      }
+    });
+  }
+
+  // Contact and recruitment forms: make required fields and privacy wording clearer.
+  if (currentPage === 'contact.html') {
+    const form = document.querySelector('#care-enquiry-form');
+    markRequiredFields(form);
+    const location = form?.querySelector('input[name="location"]');
+    if (location) location.placeholder = 'e.g. Norwich NR3 1AB';
+    const note = form?.querySelector('.form-note:not(.form-required-note)');
+    if (note) note.innerHTML = 'Your details will be used only to respond to this care enquiry and handled in line with our <a href="privacy-policy.html">Privacy Policy</a>.';
+  }
+
+  if (currentPage === 'join-amk-care.html') {
+    const form = document.querySelector('#carer-application-form');
+    markRequiredFields(form);
+    const note = form?.querySelector('.form-note:not(.form-required-note)');
+    if (note) note.innerHTML = 'Your details will be used only to respond to your application and handled in line with our <a href="privacy-policy.html">Privacy Policy</a>.';
+
+    const cta = document.querySelector('main .cta-strip');
+    if (cta) {
+      const title = cta.querySelector('h2');
+      const paragraph = cta.querySelector('p');
+      const links = cta.querySelectorAll('.cta-actions a');
+      if (title) title.textContent = 'Ready to apply?';
+      if (paragraph) paragraph.textContent = 'Complete the short application form or contact AMK Care Service on WhatsApp if you have a question.';
+      if (links[0]) {
+        links[0].href = '#carer-application-form';
+        links[0].textContent = 'Apply Online';
+      }
+      if (links[1]) {
+        links[1].href = 'https://wa.me/447852888932?text=Hello%20AMK%20Care%20Service%2C%20I%20have%20a%20question%20about%20joining%20the%20care%20team.';
+        links[1].textContent = 'Ask on WhatsApp';
+        links[1].target = '_blank';
+        links[1].rel = 'noopener';
+      }
+    }
+  }
+
+  // The thank-you page already provides the next actions; remove the repeated enquiry CTA.
+  if (currentPage === 'thank-you.html') {
+    document.querySelector('main .cta-strip')?.remove();
+  }
+
+  // Core live-in care wording: avoid implying that one carer is continuously awake for 24 hours.
+  if (currentPage === 'live-in-care.html') {
+    replaceText(
+      '.legal-card p',
+      'A dedicated professional carer stays in the client’s home to provide regular companionship, reassurance and practical support throughout the day and night.',
+      'A dedicated professional carer stays in the client’s home to provide companionship, reassurance and practical support throughout the day, with any night-time support agreed during the assessment and set out in the care plan.'
+    );
+    replaceText(
+      '.service-detail-list li',
+      'Around the clock companionship and reassurance',
+      'Ongoing companionship and reassurance'
+    );
+    replaceText(
+      '.service-detail-list li',
+      'Support with daily routines, meals and personal comfort',
+      'Support with daily routines, meals, hydration, mobility and personal comfort where included in the care plan'
+    );
+    const description = 'Live in Care from AMK Care Service, with ongoing companionship and personalised support shaped around the agreed care plan.';
+    setMeta('meta[name="description"]', description);
+    setMeta('meta[property="og:description"]', description);
+    setMeta('meta[name="twitter:description"]', description);
+  }
+
+  // Improve two legal-page sentences that sounded like internal drafting notes.
+  if (currentPage === 'complaints.html') {
+    replaceText(
+      '.legal-card p',
+      'AMK Care Service will acknowledge the concern and review it as quickly and fairly as possible. Timescales should be confirmed in AMK Care Service’s internal complaints policy.',
+      'AMK Care Service will acknowledge the concern, explain the next steps and review it as quickly and fairly as possible. The person raising the concern will be kept informed.'
+    );
+  }
+
+  if (currentPage === 'safeguarding.html') {
+    replaceText(
+      '.legal-card p',
+      'If there is an immediate risk of harm, contact emergency services. For not immediate concerns relating to AMK Care Service support, please contact AMK Care Service so the concern can be reviewed and appropriate action taken.',
+      'If there is an immediate risk of harm, contact the emergency services. For non-immediate concerns relating to AMK Care Service support, please contact the team so the concern can be reviewed and appropriate action taken.'
+    );
+  }
+
+  // Keep footer wording consistent and professionally hyphenated.
+  document.querySelectorAll('.footer-brand > p:not(.footer-small)').forEach((paragraph) => {
+    paragraph.textContent = paragraph.textContent.replace(/person centred/gi, 'person-centred');
+  });
+})();
