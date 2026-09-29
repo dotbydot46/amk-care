@@ -195,3 +195,11 @@
     padding:22px 20px;
   }
 }
+
+/* Balance the laptop hero without changing the mobile layout. */
+@media (min-width: 981px) {
+  .homepage-v3 .hero--v28 { padding: 48px 0; }
+  .homepage-v3 .hero--v28 h1 { font-size: clamp(3rem, 4.1vw, 4rem); line-height: 1.04; }
+  .homepage-v3 .hero--v28 .hero__inner { gap: 36px; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .homepage-v3 .hero__visual--v28 { min-height: 420px; }
+}
