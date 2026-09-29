@@ -200,7 +200,7 @@ textarea { resize: vertical; }
 .floating-actions a { background: var(--navy); color: white; border-radius: 999px; min-height: 50px; display: grid; place-items: center; font-weight: 950; box-shadow: 0 12px 28px rgba(5,37,74,.28); }
 .floating-actions a:last-child { background: linear-gradient(135deg, var(--gold), var(--gold-2)); color: var(--navy); }
 
-.reveal { opacity: 0; transform: translateY(18px); transition: opacity .65s ease, transform .65s ease; }
+.reveal { opacity: 1; transform: none; }
 .reveal.is-visible { opacity: 1; transform: translateY(0); }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2088,4 +2088,31 @@ html { scroll-padding-top: calc(var(--header-h) + 18px); }
   .legal-hero h1 { font-size: clamp(2rem, 10vw, 2.65rem); }
   .hero--v26 h1,
   .about-hero-v26 h1 { font-size: clamp(2.4rem, 11vw, 3.2rem); }
+}
+
+/* Final usability pass: retain the typefaces and palette, improve reading and controls. */
+.lead, .care-page-hero__copy .lead { font-weight: 400; }
+.eyebrow, .text-link, .contact-list span { color: #805719; }
+.legal-hero .eyebrow, .cta-strip .eyebrow,
+.care-example .eyebrow, .family-time .eyebrow { color: var(--gold-2); }
+.contact-form label { font-weight: 600; }
+.contact-form input, .contact-form select, .contact-form textarea { font-weight: 400; min-width: 0; }
+.required { color: #9b451f; }
+.form-note a, .cookie-banner a, .legal-card p a, .accordion p a { text-decoration: underline; text-underline-offset: 3px; }
+.btn:disabled { cursor: wait; opacity: .65; transform: none; }
+.cookie-settings { border: 0; background: transparent; color: inherit; padding: 8px 0; font: inherit; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+.cookie-banner { max-height: calc(100svh - 24px); overflow-y: auto; }
+.cookie-banner .btn { font-weight: 700; }
+@media (max-width: 1250px) {
+  .nav-toggle { display: block; flex-shrink: 0; }
+  .nav__menu { position: absolute; left: 14px; right: 14px; top: calc(100% + 8px); display: none; flex-direction: column; align-items: stretch; gap: 6px; padding: 18px; border-radius: 18px; background: var(--navy); box-shadow: var(--shadow); max-height: calc(100svh - 150px); overflow-y: auto; }
+  .nav__menu.is-open { display: flex; }
+  .nav__menu a { padding: 12px; }
+  .nav__menu .btn { width: 100%; }
+}
+@media (max-width: 680px) {
+  .contact-form { scroll-margin-top: 90px; }
+  body:has(.cookie-banner:not([hidden])) .floating-actions,
+  body:has(.contact-form :focus) .floating-actions { visibility: hidden; }
+  .footer { padding-bottom: 76px; }
 }
