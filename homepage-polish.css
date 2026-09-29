@@ -10,6 +10,7 @@
 .homepage-v3 .hero--v28 .hero__inner{align-items:center;gap:54px}
 .homepage-v3 .hero--v28 h1{font-size:clamp(3rem,5.6vw,5.35rem);line-height:.98;letter-spacing:-.045em;max-width:780px}
 .homepage-v3 .hero--v28 .lead{font-size:1.17rem;line-height:1.72;max-width:680px}
+.homepage-v3 .hero__visual--v28{min-width:0;max-width:100%}
 .homepage-v3 .hero__visual--v28 img{border-radius:32px;box-shadow:0 24px 70px rgba(8,35,72,.17)}
 
 .homepage-v3 .trust-strip--v28{background:#06264f;color:#fff;padding:25px 0}

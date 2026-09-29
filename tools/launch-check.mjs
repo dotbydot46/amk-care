@@ -37,10 +37,10 @@ for (const file of htmlFiles) {
   const ids = collectIds(html);
 
   if (!/<title>[^<]{10,}<\/title>/i.test(html)) issues.push(`${file}: missing or very short <title>`);
-  if (!/<meta\s+content=["'][^"']{40,}["']\s+name=["']description["']/i.test(html)) {
+  if (!/<meta\b(?=[^>]*\bcontent=["'][^"']{40,}["'])(?=[^>]*\bname=["']description["'])[^>]*>/i.test(html)) {
     issues.push(`${file}: missing or very short meta description`);
   }
-  if (!/<link\s+href=["']https:\/\/amkcare\.co\.uk\/[^"']*["']\s+rel=["']canonical["']/i.test(html)) {
+  if (!/<link\b(?=[^>]*\bhref=["']https:\/\/amkcare\.co\.uk\/[^"']*["'])(?=[^>]*\brel=["']canonical["'])[^>]*>/i.test(html)) {
     issues.push(`${file}: missing canonical URL`);
   }
 
@@ -60,7 +60,7 @@ for (const file of htmlFiles) {
   }
 
   const lower = html.toLowerCase();
-  for (const phrase of ['to be confirmed', 'before final public launch', 'regulatory wording should be updated']) {
+  for (const phrase of ['to be confirmed', 'before final public launch', 'regulatory wording', 'local seo note', 'across england', 'throughout england', 'selected local areas', '24 hour companionship', 'around the clock']) {
     if (lower.includes(phrase)) issues.push(`${file}: public placeholder copy remains: "${phrase}"`);
   }
 
